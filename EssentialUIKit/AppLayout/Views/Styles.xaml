@@ -11,9 +11,9 @@
 
     <converters:StringToImageResourceConverter x:Key="ImageResourceConverter" />
 
-    <x:String x:Key="HomePageTitle">Essential UI Kit</x:String>
+    <x:String x:Key="HomePageTitle">Bets Friend</x:String>
 
-    <x:String x:Key="Description">Essential UI Kit for Xamarin.Forms includes elegantly designed XAML templates for Xamarin.Forms apps</x:String>
+    <x:String x:Key="Description">Tools for building, monitoring and collaborating multis and quaddies</x:String>
 
     <!--  Common style for action bar icons  -->
     <Style x:Key="ActionBarSettingIconStyle" TargetType="Button">
