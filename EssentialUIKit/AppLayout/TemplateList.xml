@@ -1,6 +1,12 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <Samples>
-
+  <Home Icon="social.png" Name="Collaboration" IsUpdated="True" Description="Build something with friends">
+    <HomePages Name="Build a Multi" Description="" PageName="Views.Catalog.Multi"/>
+    <HomePages Name="Build a Quaddie" Description=" " PageName="Views.Catalog.ListVenuesPage"/> 
+  </Home>  
+  <Home Icon="feedback.png" Name="Find a Multi" IsUpdated="True" Description="Build something with friends">
+    <HomePages Name="AFL" Description="" PageName="Views.Catalog.CatalogListPage"/>
+  </Home>      
   <Category Icon="log-in.png" Name="Forms" IsUpdated="True" Description="Get the user’s details to authenticate, create a profile, and enter credit card information for online payment portal.">
     <Page Name="Simple Login Page" Description="If you want a simple and clean authentication form, just add this page to your application. Email validation is done within this form." PageName="Views.Forms.SimpleLoginPage"/>
     <Page Name="Simple Sign Up Page" Description="This is a supporting form for a simple login page that can be modified to match any of your login pages on the fly. Email validation is done in this form." PageName="Views.Forms.SimpleSignUpPage"/>

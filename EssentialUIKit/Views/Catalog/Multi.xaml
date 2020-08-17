@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="EssentialUIKit.Views.Catalog.Multi"
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:badge="clr-namespace:Syncfusion.XForms.BadgeView;assembly=Syncfusion.SfBadgeView.XForms"
+    xmlns:behavior="clr-namespace:EssentialUIKit.Behaviors.Catalog"
+    xmlns:buttons="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Buttons.XForms"
+    xmlns:commonBehavior="clr-namespace:EssentialUIKit.Behaviors"
+    xmlns:controls="clr-namespace:EssentialUIKit.Controls"
+    xmlns:converter="clr-namespace:EssentialUIKit.Converters"
+    xmlns:helper="clr-namespace:EssentialUIKit.Helpers"
+    xmlns:listView="clr-namespace:Syncfusion.ListView.XForms;assembly=Syncfusion.SfListView.XForms"
+    xmlns:rating="clr-namespace:Syncfusion.SfRating.XForms;assembly=Syncfusion.SfRating.XForms"
+    xmlns:template="clr-namespace:EssentialUIKit.Views.Templates"
+    x:Name="multiPage"
+    Title="Muilto Builder page"
+    NavigationPage.HasNavigationBar="False"
+    Style="{StaticResource ContentPageStyle}">
+
+    <ContentPage.Behaviors>
+        <behavior:CartBehavior />
+    </ContentPage.Behaviors>
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <converter:BooleanToColorConverter x:Key="boolToColorConverter" />
+            <converter:BooleanToStringConverter x:Key="boolToStringConverter" />
+            <converter:IntToThicknessConverter x:Key="intToThicknessConverter" />
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Styles.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+   <ContentPage.Content>
+       <Label
+           Margin="0,16,0,4"
+           FontFamily="{StaticResource Montserrat-SemiBold}"
+           FontSize="16"
+           LineHeight="{OnPlatform Android=1.5, Default=-1}"
+           Text="Coming Soon"
+           TextColor="{DynamicResource Gray-900}" />
+    </ContentPage.Content>
+
+</ContentPage>

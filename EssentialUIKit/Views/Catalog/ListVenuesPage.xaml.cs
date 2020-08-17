@@ -9,12 +9,12 @@ namespace EssentialUIKit.Views.Catalog
     /// </summary>
     [Preserve(AllMembers = true)]
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class CatalogListPage
+    public partial class ListVenuesPage
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="CatalogListPage" /> class.
+        /// Initializes a new instance of the <see cref="ListVenuesPage" /> class.
         /// </summary>
-        public CatalogListPage()
+        public ListVenuesPage()
         {
             InitializeComponent();
             this.BindingContext = CatalogDataService.Instance.CatalogPageViewModel;

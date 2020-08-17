@@ -131,7 +131,12 @@
     <EmbeddedResource Include="Images\SomethingWentWrong.svg" />
     <EmbeddedResource Include="Images\WaterConsumed.svg" />
   </ItemGroup>
+  
   <ItemGroup>
+    <Compile Update="Views\Catalog\ListVenuesPage.xaml.cs">
+        <DependentUpon>ListVenuesPage.xaml</DependentUpon>
+    </Compile>
+            
     <Compile Update="AppLayout\Views\Styles.xaml.cs">
         <DependentUpon>%(Filename)</DependentUpon>
     </Compile>
@@ -296,6 +301,9 @@
 	</Compile>
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Views\Collaboration\" />
+  </ItemGroup>
   <Import Project="..\..\build\tools\Syncfusion.CodeAnalysis.FxCop\tools\FxCop.MsBuild.targets" Condition="Exists('..\..\build\tools\Syncfusion.CodeAnalysis.FxCop\tools\FxCop.MsBuild.targets')" />
   <Import Project="..\build\tools\Syncfusion.CodeAnalysis.StyleCop\tools\StyleCop.MsBuild.targets" Condition="Exists('..\build\tools\Syncfusion.CodeAnalysis.StyleCop\tools\StyleCop.MsBuild.targets')" />
 
