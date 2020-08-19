@@ -1,3 +1,7 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+
 using EssentialUIKit.DataService;
 using Xamarin.Forms.Internals;
 using Xamarin.Forms.Xaml;
@@ -18,6 +22,8 @@ namespace EssentialUIKit.Views.Catalog
         {
             InitializeComponent();
             this.BindingContext = CatalogDataService.Instance.CatalogPageViewModel;
+
         }
+
     }
 }

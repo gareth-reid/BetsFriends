@@ -40,6 +40,7 @@
     <PackageReference Include="Xamarin.Forms" Version="4.3.0.991250" />
     <PackageReference Include="Syncfusion.Xamarin.Core" Version="17.4.0.44" />
     <PackageReference Include="NETStandard.Library" Version="2.0.3" />
+    <PackageReference Include="System.Linq" Version="4.3.0" />
   </ItemGroup>
   <ItemGroup>
     <None Remove="AppLayout\Icons\bookmark.png" />

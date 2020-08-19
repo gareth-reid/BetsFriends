@@ -1,0 +1,88 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <MinimumVisualStudioVersion>11.0</MinimumVisualStudioVersion>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{05419E45-CAD4-4FB6-BC46-B93119D9F22D}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Betfair.ESASwagger</RootNamespace>
+    <AssemblyName>Betfair.ESASwagger</AssemblyName>
+    <DefaultLanguage>en-US</DefaultLanguage>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{786C830F-07A1-408B-BD7F-6EE04809D6DB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <TargetFrameworkProfile>Profile111</TargetFrameworkProfile>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="Betfair\ESASwagger\Model\**" />
+    <Compile Include="Betfair\ESASwagger\Properties\**" />
+    <Compile Include="stream-api-sample-code\csharp\Betfair.ESAClient\Betfair.ESASwagger\Betfair\ESASwagger\Model\AllRequestTypesExample.cs" />
+    <Compile Include="stream-api-sample-code\csharp\Betfair.ESAClient\Betfair.ESASwagger\Betfair\ESASwagger\Model\AllResponseTypesExample.cs" />
+    <Compile Include="stream-api-sample-code\csharp\Betfair.ESAClient\Betfair.ESASwagger\Betfair\ESASwagger\Model\AuthenticationMessage.cs" />
+    <Compile Include="stream-api-sample-code\csharp\Betfair.ESAClient\Betfair.ESASwagger\Betfair\ESASwagger\Model\ConnectionMessage.cs" />
+    <Compile Include="stream-api-sample-code\csharp\Betfair.ESAClient\Betfair.ESASwagger\Betfair\ESASwagger\Model\HeartbeatMessage.cs" />
+    <Compile Include="stream-api-sample-code\csharp\Betfair.ESAClient\Betfair.ESASwagger\Betfair\ESASwagger\Model\MarketChange.cs" />
+    <Compile Include="stream-api-sample-code\csharp\Betfair.ESAClient\Betfair.ESASwagger\Betfair\ESASwagger\Model\MarketChangeMessage.cs" />
+    <Compile Include="stream-api-sample-code\csharp\Betfair.ESAClient\Betfair.ESASwagger\Betfair\ESASwagger\Model\MarketDataFilter.cs" />
+    <Compile Include="stream-api-sample-code\csharp\Betfair.ESAClient\Betfair.ESASwagger\Betfair\ESASwagger\Model\MarketDefinition.cs" />
+    <Compile Include="stream-api-sample-code\csharp\Betfair.ESAClient\Betfair.ESASwagger\Betfair\ESASwagger\Model\MarketFilter.cs" />
+    <Compile Include="stream-api-sample-code\csharp\Betfair.ESAClient\Betfair.ESASwagger\Betfair\ESASwagger\Model\MarketSubscriptionMessage.cs" />
+    <Compile Include="stream-api-sample-code\csharp\Betfair.ESAClient\Betfair.ESASwagger\Betfair\ESASwagger\Model\Order.cs" />
+    <Compile Include="stream-api-sample-code\csharp\Betfair.ESAClient\Betfair.ESASwagger\Betfair\ESASwagger\Model\OrderChangeMessage.cs" />
+    <Compile Include="stream-api-sample-code\csharp\Betfair.ESAClient\Betfair.ESASwagger\Betfair\ESASwagger\Model\OrderFilter.cs" />
+    <Compile Include="stream-api-sample-code\csharp\Betfair.ESAClient\Betfair.ESASwagger\Betfair\ESASwagger\Model\OrderMarketChange.cs" />
+    <Compile Include="stream-api-sample-code\csharp\Betfair.ESAClient\Betfair.ESASwagger\Betfair\ESASwagger\Model\OrderRunnerChange.cs" />
+    <Compile Include="stream-api-sample-code\csharp\Betfair.ESAClient\Betfair.ESASwagger\Betfair\ESASwagger\Model\OrderSubscriptionMessage.cs" />
+    <Compile Include="stream-api-sample-code\csharp\Betfair.ESAClient\Betfair.ESASwagger\Betfair\ESASwagger\Model\RequestMessage.cs" />
+    <Compile Include="stream-api-sample-code\csharp\Betfair.ESAClient\Betfair.ESASwagger\Betfair\ESASwagger\Model\ResponseMessage.cs" />
+    <Compile Include="stream-api-sample-code\csharp\Betfair.ESAClient\Betfair.ESASwagger\Betfair\ESASwagger\Model\RunnerChange.cs" />
+    <Compile Include="stream-api-sample-code\csharp\Betfair.ESAClient\Betfair.ESASwagger\Betfair\ESASwagger\Model\RunnerDefinition.cs" />
+    <Compile Include="stream-api-sample-code\csharp\Betfair.ESAClient\Betfair.ESASwagger\Betfair\ESASwagger\Model\StatusMessage.cs" />
+    <Compile Include="stream-api-sample-code\csharp\Betfair.ESAClient\Betfair.ESASwagger\Betfair\ESASwagger\Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\packages\Newtonsoft.Json.12.0.3\lib\portable-net45+win8+wp8+wpa81\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.CompilerServices.Unsafe">
+      <HintPath>..\packages\System.Runtime.CompilerServices.Unsafe.4.7.1\lib\netstandard1.0\System.Runtime.CompilerServices.Unsafe.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Threading.Tasks.Extensions">
+      <HintPath>..\packages\System.Threading.Tasks.Extensions.4.5.4\lib\portable-net45+win8+wp8+wpa81\System.Threading.Tasks.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ValueTuple">
+      <HintPath>..\packages\System.ValueTuple.4.5.0\lib\netstandard1.0\System.ValueTuple.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
