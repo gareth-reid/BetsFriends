@@ -15,7 +15,7 @@ namespace Betfair.ESAClient.Cache
         private readonly Market _market;
         private readonly RunnerId _runnerId;
 
-        // Level / Depth Based Ladders
+        // Level/Depth Based Ladders
         private MarketRunnerPrices _runnerPrices = MarketRunnerPrices.EMPTY;
         private PriceSizeLadder _atlPrices = PriceSizeLadder.NewLay();
         private PriceSizeLadder _atbPrices = PriceSizeLadder.NewBack();

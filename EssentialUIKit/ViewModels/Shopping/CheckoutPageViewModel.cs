@@ -62,7 +62,7 @@ namespace EssentialUIKit.ViewModels.Shopping
                     CardTypeIcon = "Card.png"
                 },
                 new Payment {PaymentMode = "Wells Fargo Bank Credit Card"},
-                new Payment {PaymentMode = "Debit / Credit Card"},
+                new Payment {PaymentMode = "Debit/Credit Card"},
                 new Payment {PaymentMode = "NetBanking"},
                 new Payment {PaymentMode = "Cash on Delivery"},
                 new Payment {PaymentMode = "Wallet"},
@@ -94,7 +94,7 @@ namespace EssentialUIKit.ViewModels.Shopping
                 percent += item.DiscountPercent;
             }
 
-            this.DiscountPercent = percent > 0 ? percent / this.CartDetails.Count : 0;
+            this.DiscountPercent = percent > 0 ? percent/this.CartDetails.Count : 0;
 
             this.EditCommand = new Command(this.EditClicked);
             this.AddAddressCommand = new Command(this.AddAddressClicked);

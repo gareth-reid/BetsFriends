@@ -9,11 +9,11 @@
              xmlns:listView="clr-namespace:Syncfusion.ListView.XForms;assembly=Syncfusion.SfListView.XForms"
              xmlns:core="clr-namespace:Syncfusion.XForms.Core;assembly=Syncfusion.Core.XForms"
              xmlns:template="clr-namespace:EssentialUIKit.Views.Templates"
-             x:Class="EssentialUIKit.Views.Catalog.ListVenuesPage"
+             x:Class="EssentialUIKit.Views.Catalog.ListRunnersPage"
              BackgroundColor="{DynamicResource Gray-White}"
              NavigationPage.HasNavigationBar="False"
-             x:Name="listVenuesPage"
-             Title="List Venues">
+             x:Name="listRunnersPage"
+             Title="List Runners">
 
     <ContentPage.Resources>
         <ResourceDictionary>
@@ -36,12 +36,12 @@
             CornerRadius="10,10,0,0">
             <StackLayout>
            <ActivityIndicator HorizontalOptions="Center" VerticalOptions="Center" 
-            IsRunning="{Binding Source={x:Reference venueListView}}" 
+            IsRunning="{Binding Source={x:Reference runnerListView}}" 
             x:Name="activity"/>
                <controls:ParallaxListView
-                x:Name="venueListView"
+                x:Name="runnerListView"
                 HasUnevenRows="True"
-                ItemsSource="{Binding Venues}"
+                ItemsSource="{Binding Runners}"
                 RowHeight="85"
                 SelectionChanged="ListView_OnSelectionChanged"
                 SeparatorVisibility="Default">                
@@ -64,7 +64,7 @@
                                         <!--Details of travel place-->
                                         <Label Grid.Row="1" 
                                            Margin="8,8,8,8"
-                                           Text="{Binding Description}"
+                                           Text="{Binding MetaDataDisplay}"
                                            TextColor="{DynamicResource Gray-700}"
                                            FontSize="12"
                                            FontFamily="{DynamicResource Montserrat-Medium}"

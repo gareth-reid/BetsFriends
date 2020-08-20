@@ -241,7 +241,7 @@
                                                 Text="{Binding RoomDetail.Cost, StringFormat='${0:0}'}"
                                                 TextColor="{DynamicResource PrimaryColor}" />
 
-                                                <Span  Text=" / " FontSize="16" TextColor="{DynamicResource Gray-700}" />
+                                                <Span  Text="/" FontSize="16" TextColor="{DynamicResource Gray-700}" />
 
                                                 <Span FontSize="14"
                                                FontFamily="{StaticResource Montserrat-Regular}" 

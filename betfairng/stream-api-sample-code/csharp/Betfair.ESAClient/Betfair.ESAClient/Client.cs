@@ -31,7 +31,7 @@ namespace Betfair.ESAClient
         /// </summary>
         private AppKeyAndSessionProvider _sessionProvider;
         /// <summary>
-        /// Handles request / response correlation
+        /// Handles request/response correlation
         /// </summary>
         private RequestResponseProcessor _processor;
 
@@ -41,7 +41,7 @@ namespace Betfair.ESAClient
         private Timer _keepAliveTimer;
 
         /// <summary>
-        /// Lock protecting start / stop flow control
+        /// Lock protecting start/stop flow control
         /// </summary>
         private readonly object _startStopLock = new object();
         /// <summary>
@@ -49,11 +49,11 @@ namespace Betfair.ESAClient
         /// </summary>
         private readonly object _retryLock = new object();
         /// <summary>
-        /// Flag used to protect / signal starting.
+        /// Flag used to protect/signal starting.
         /// </summary>
         private volatile bool _isStarted = false;
         /// <summary>
-        /// Flag used to protect / signal stopping.
+        /// Flag used to protect/signal stopping.
         /// </summary>
         private volatile bool _isStopping = false;
         /// <summary>
@@ -419,7 +419,7 @@ namespace Betfair.ESAClient
                 stream = sslStream;
             }
 
-            //Setup reader / writer
+            //Setup reader/writer
             _reader = new StreamReader(stream, Encoding.UTF8, false, _client.ReceiveBufferSize);
             _writer = new StreamWriter(stream, Encoding.UTF8);
         }

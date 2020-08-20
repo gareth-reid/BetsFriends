@@ -111,9 +111,9 @@ namespace BetfairNG
                             if (markets.Count > 0)
                             {
                                 // TODO:// look at spinwait or signalling instead of this
-                                while (connectionCount > 1 && DateTime.Now.Subtract(lastRequestStart).TotalMilliseconds < (1000 / connectionCount))
+                                while (connectionCount > 1 && DateTime.Now.Subtract(lastRequestStart).TotalMilliseconds < (1000/connectionCount))
                                 {
-                                    int waitMs = (1000 / connectionCount) - (int)DateTime.Now.Subtract(lastRequestStart).TotalMilliseconds;
+                                    int waitMs = (1000/connectionCount) - (int)DateTime.Now.Subtract(lastRequestStart).TotalMilliseconds;
                                     Thread.Sleep(waitMs > 0 ? waitMs : 0);
                                 }
 
@@ -161,7 +161,7 @@ namespace BetfairNG
                                 Thread.Sleep(500);
                         }
                     });
-                Thread.Sleep(1000 / connectionCount);
+                Thread.Sleep(1000/connectionCount);
             }
         }
     }

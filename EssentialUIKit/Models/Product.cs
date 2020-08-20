@@ -125,7 +125,7 @@ namespace EssentialUIKit.Models
         {
             get
             {
-                return this.ActualPrice - (this.ActualPrice * ( this.DiscountPercent / 100 ));
+                return this.ActualPrice - (this.ActualPrice * ( this.DiscountPercent/100 ));
             }
 
             set

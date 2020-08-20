@@ -18,18 +18,20 @@ namespace EssentialUIKit.Views.Catalog
     /// </summary>
     [Preserve(AllMembers = true)]
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class ListVenuesPage
+    public partial class ListRunnersPage
     {
-        private const string _betfairApi = "http://192.168.1.6:7071/api/BFHorseVenues?mock=true";//?mock=true";
+        //192.168.1.6
+        private const string _betfairApi = "http://192.168.1.6:7071/api/BFHorseRunners?";//?mock=true";
         private HttpClient _client = new HttpClient();
-
-        public ObservableCollection<Venue> Venues { get; } = new ObservableCollection<Venue>();
+        private Race _race;
+        public ObservableCollection<Runner> Runners { get; } = new ObservableCollection<Runner>();
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ListVenuesPage" /> class.
         /// </summary>
-        public ListVenuesPage()
+        public ListRunnersPage(Race race)
         {
+            _race = race;
             InitializeComponent();
             SetActivity(true);
             //this.BindingContext = CatalogDataService.Instance.CatalogPageViewModel;
@@ -41,17 +43,17 @@ namespace EssentialUIKit.Views.Catalog
             try
             {
                 SetActivity(true);
-                var content = await _client.GetStringAsync(_betfairApi);
-                var venues = JsonConvert.DeserializeObject<List<string>>(content);
+                var content = await _client.GetStringAsync(_betfairApi + "id=" + _race.Id);
+                var runners = JsonConvert.DeserializeObject<List<string>>(content);
                 
-                foreach ( string v in venues)
+                foreach ( string r in runners)
                 {
-                    var venueArray = v.Split('|');
-                    var venue = new Venue(venueArray[0].Trim(), venueArray[1].Trim(), venueArray[2].Trim());
-                    Venues.Add(venue);
+                    var runnerArray = r.Split('|');
+                    var runner = new Runner(runnerArray[0].Trim(), runnerArray[1].Trim(), runnerArray[2].Trim());
+                    Runners.Add(runner);
                 }                
                 
-                venueListView.ItemsSource = Venues;
+                runnerListView.ItemsSource = Runners;
                 //BindingContext = this;
             }
             catch (Exception e)
@@ -81,24 +83,59 @@ namespace EssentialUIKit.Views.Catalog
                 return;
             }
             var assembly = typeof(App).GetTypeInfo().Assembly;
-            var pageName = "ListRacesPage";
+            var pageName = "ListRunnersPage";
             //var template = new Template("Races", "List Races", pageName, false, "", true);
-            Routing.RegisterRoute("ListRaces",
+            Routing.RegisterRoute("ListRunners",
                 assembly.GetType($"EssentialUIKit.{pageName}"));
-            Navigation.PushAsync(new ListRacesPage(e.SelectedItem as Venue));
+            //Navigation.PushAsync(new ListRacesPage(e.SelectedItem as Venue));
         }
     }
 
-    public class Venue
+    public class Runner
     {
-        public Venue(String name, String description, String id)
+        public Runner(String name, string metaData, String id)
         {
             Name = name;
-            Description = description;
             Id = id;
+            BuildMetadata(metaData);
         }
         public String Name { get; set; }
-        public String Description { get; set; }
+        public RunnerMetaData MetaData { get; set; }
+        public string MetaDataDisplay
+        {
+            get { return MetaData.ToString(); }
+        }
+
         public String Id { get; set; }
+
+        public void BuildMetadata(string metaData)
+        {
+            MetaData = new RunnerMetaData();
+            var metaDataArray = metaData.Split('^');
+            MetaData.Jockey = metaDataArray[0];
+            MetaData.Trainer = metaDataArray[1];
+            MetaData.Weight = metaDataArray[2];
+            MetaData.Form = metaDataArray[3];
+            MetaData.Barrier = metaDataArray[4];            
+        }
+
+    }
+
+    public class RunnerMetaData
+    {
+        public string Jockey;
+        public string Trainer;
+        public string Weight;
+        public string Form;
+        public string Barrier;
+
+        public override string ToString()
+        {
+            return "F: " + Form +
+                 ", W: " + Weight +
+                 ", B: (" + Barrier + ")" +
+                 ", T: " + Trainer +
+                 ", J: " + Jockey;
+        }
     }
 }

@@ -53,7 +53,7 @@ namespace EssentialUIKit.Views.Chat
                 var shrinkAnimation = new Animation(property =>
                 {
                     SearchBox.WidthRequest = property;
-                    opacity = property / TitleBar.Width;
+                    opacity = property/TitleBar.Width;
                     SearchBox.Opacity = opacity;
                 },
                 TitleBar.Width, 0, Easing.Linear);
@@ -91,7 +91,7 @@ namespace EssentialUIKit.Views.Chat
                     property =>
                     {
                         SearchBox.WidthRequest = property;
-                        opacity = property / TitleBar.Width;
+                        opacity = property/TitleBar.Width;
                         SearchBox.Opacity = opacity;
                     }, 0, TitleBar.Width, Easing.Linear);
                 expandAnimation.Commit(SearchBox, "Expand", 16, 250, Easing.Linear, (p, q) => this.SearchExpandAnimationCompleted());

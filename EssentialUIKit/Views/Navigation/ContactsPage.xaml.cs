@@ -59,7 +59,7 @@ namespace EssentialUIKit.Views.Navigation
                     property =>
                     {
                         Search.WidthRequest = property;
-                        opacity = property / ContactsTitleView.Width;
+                        opacity = property/ContactsTitleView.Width;
                         Search.Opacity = opacity;
                     }, 0, ContactsTitleView.Width, Easing.Linear);
                 expandAnimation.Commit(Search, "Expand", 16, 250, Easing.Linear, (p, q) => this.SearchExpandAnimationCompleted());
@@ -82,7 +82,7 @@ namespace EssentialUIKit.Views.Navigation
                 var shrinkAnimation = new Animation(property =>
                 {
                     Search.WidthRequest = property;
-                    opacity = property / ContactsTitleView.Width;
+                    opacity = property/ContactsTitleView.Width;
                     Search.Opacity = opacity;
                 },
                 ContactsTitleView.Width, 0, Easing.Linear);

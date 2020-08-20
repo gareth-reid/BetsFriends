@@ -21,7 +21,7 @@ namespace EssentialUIKit.iOS
             if (this.Control != null)
             {
                 this.Control.Text = (e.NewElement as Controls.CalenderDatePicker).PlaceHolderText;
-                this.Control.TextColor = new UIColor(96 / 255, 106 / 255, 123 / 255, 1.0f);
+                this.Control.TextColor = new UIColor(96/255, 106/255, 123/255, 1.0f);
                 this.Control.BorderStyle = UITextBorderStyle.None;
                 this.Control.VerticalAlignment = UIControlContentVerticalAlignment.Center;
             }

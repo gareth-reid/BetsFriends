@@ -55,7 +55,7 @@ namespace EssentialUIKit.Views.Catalog
                     property =>
                     {
                         Search.WidthRequest = property;
-                        opacity = property / TitleView.Width;
+                        opacity = property/TitleView.Width;
                         Search.Opacity = opacity;
                     }, 0, TitleView.Width, Easing.Linear);
                 expandAnimation.Commit(Search, "Expand", 16, 250, Easing.Linear, (p, q) => this.SearchExpandAnimationCompleted());
@@ -78,7 +78,7 @@ namespace EssentialUIKit.Views.Catalog
                 var shrinkAnimation = new Animation(property =>
                 {
                     Search.WidthRequest = property;
-                    opacity = property / TitleView.Width;
+                    opacity = property/TitleView.Width;
                     Search.Opacity = opacity;
                 },
                 TitleView.Width, 0, Easing.Linear);

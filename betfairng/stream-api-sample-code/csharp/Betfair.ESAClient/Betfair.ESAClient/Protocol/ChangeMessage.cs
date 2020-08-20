@@ -50,7 +50,7 @@ namespace Betfair.ESAClient.Protocol
         }
 
         /// <summary>
-        /// Start of subscription / resubscription
+        /// Start of subscription/resubscription
         /// </summary>
         public bool IsStartOfRecovery
         {
@@ -62,7 +62,7 @@ namespace Betfair.ESAClient.Protocol
         }
 
         /// <summary>
-        /// End of subscription / resubscription
+        /// End of subscription/resubscription
         /// </summary>
         public bool IsEndOfRecovery
         {

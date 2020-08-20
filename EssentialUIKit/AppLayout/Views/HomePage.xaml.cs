@@ -104,7 +104,7 @@ namespace EssentialUIKit.AppLayout.Views
         {
             if (!this.loaded)
             {
-                this.scrollDensity = Application.Current.MainPage.Width / listView.WidthInPixel;
+                this.scrollDensity = Application.Current.MainPage.Width/listView.WidthInPixel;
                 this.actualHeaderX = HeaderText.X;
                 this.actualHeaderY = HeaderText.Y;
 
@@ -115,7 +115,7 @@ namespace EssentialUIKit.AppLayout.Views
 
             var scrollValue = e.Position * this.scrollDensity;
 
-            var factor = (scrollValue + 215) / 215;
+            var factor = (scrollValue + 215)/215;
 
             if (scrollValue <= -215)
             {
@@ -127,7 +127,7 @@ namespace EssentialUIKit.AppLayout.Views
                 HeaderImage.Opacity = factor;
                 HeaderText.TranslationX = this.headerDeltaX * (factor - 1);
                 HeaderText.TranslationY = (-1 * scrollValue) + (this.headerDeltaY * (factor - 1));
-                BrandName.Opacity = (scrollValue + 75) / 75;
+                BrandName.Opacity = (scrollValue + 75)/75;
                 ActionBar.IsVisible = false;
                 SettingsIcon.TranslationY = scrollValue * -1;
                 CodeViewerIcon.TranslationY = scrollValue * -1;

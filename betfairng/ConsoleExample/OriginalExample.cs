@@ -54,8 +54,8 @@ public class OriginalExample
             {
                 var rc = mc.Runners.Find(runner => runner.SelectionId.Equals(r.SelectionId));
                 Console.WriteLine("Horse: " + rc.RunnerName +
-                    " | Last Price:" + r.LastPriceTraded +
-                    " | Status: " + r.Status);
+                    "|Last Price:" + r.LastPriceTraded +
+                    "|Status: " + r.Status);
             }
         }
         

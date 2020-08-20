@@ -69,7 +69,7 @@ namespace EssentialUIKit.Controls
             if ( height <= 0 )
                 height = this.ParallaxHeaderView.Height;
 
-            var y = -(int)( (float)ScrollY / 2.0f );
+            var y = -(int)( (float)ScrollY/2.0f );
 
             if ( y < 0 )
             {
@@ -79,8 +79,8 @@ namespace EssentialUIKit.Controls
             else if ( Device.RuntimePlatform == "iOS" )
             {
                 var newHeight = height + ( ScrollY * -1 );
-                this.ParallaxHeaderView.Scale = newHeight / height;
-                this.ParallaxHeaderView.TranslationY = -( ScrollY / 2 );
+                this.ParallaxHeaderView.Scale = newHeight/height;
+                this.ParallaxHeaderView.TranslationY = -( ScrollY/2 );
             }
             else
             {

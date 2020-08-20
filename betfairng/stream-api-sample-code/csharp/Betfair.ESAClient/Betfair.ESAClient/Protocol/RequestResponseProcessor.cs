@@ -15,7 +15,7 @@ using Betfair.ESAClient.Auth;
 namespace Betfair.ESAClient.Protocol
 {
     /// <summary>
-    /// This class implements the basic request / response handling of the protocol
+    /// This class implements the basic request/response handling of the protocol
     /// </summary>
     public class RequestResponseProcessor
     {
@@ -341,7 +341,7 @@ namespace Betfair.ESAClient.Protocol
 
             if (statusMessage.Id == null)
             {
-                //async status / status for a message that couldn't be decoded
+                //async status/status for a message that couldn't be decoded
                 ProcessUncorrelatedStatus(statusMessage);
             } else {
                 RequestResponse task;
@@ -377,7 +377,7 @@ namespace Betfair.ESAClient.Protocol
         }
 
         /// <summary>
-        /// Extracts the op / operation attribute denoting the type of the message
+        /// Extracts the op/operation attribute denoting the type of the message
         /// </summary>
         /// <param name="jreader">A reader containing json</param>
         /// <returns>The "op" value</returns>

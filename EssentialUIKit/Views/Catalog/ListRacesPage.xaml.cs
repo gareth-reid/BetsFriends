@@ -3,13 +3,11 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Net.Http;
-using EssentialUIKit.AppLayout.Models;
 using EssentialUIKit.DataService;
 using Newtonsoft.Json;
 using Xamarin.Forms;
 using Xamarin.Forms.Internals;
 using Xamarin.Forms.Xaml;
-using System.Reflection;
 
 namespace EssentialUIKit.Views.Catalog
 {
@@ -18,18 +16,19 @@ namespace EssentialUIKit.Views.Catalog
     /// </summary>
     [Preserve(AllMembers = true)]
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class ListVenuesPage
+    public partial class ListRacesPage
     {
-        private const string _betfairApi = "http://192.168.1.6:7071/api/BFHorseVenues?mock=true";//?mock=true";
+        private const string _betfairApi = "http://192.168.1.6:7071/api/BFRaces?mock=true&";
         private HttpClient _client = new HttpClient();
-
-        public ObservableCollection<Venue> Venues { get; } = new ObservableCollection<Venue>();
+        private Venue _venue;
+        public ObservableCollection<Race> Races { get; } = new ObservableCollection<Race>();
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ListVenuesPage" /> class.
         /// </summary>
-        public ListVenuesPage()
+        public ListRacesPage(Venue venue)
         {
+            _venue = venue;
             InitializeComponent();
             SetActivity(true);
             //this.BindingContext = CatalogDataService.Instance.CatalogPageViewModel;
@@ -41,17 +40,17 @@ namespace EssentialUIKit.Views.Catalog
             try
             {
                 SetActivity(true);
-                var content = await _client.GetStringAsync(_betfairApi);
-                var venues = JsonConvert.DeserializeObject<List<string>>(content);
+                var content = await _client.GetStringAsync(_betfairApi + "id=" + _venue.Id);
+                var races = JsonConvert.DeserializeObject<List<string>>(content);
                 
-                foreach ( string v in venues)
+                foreach ( string r in races)
                 {
-                    var venueArray = v.Split('|');
-                    var venue = new Venue(venueArray[0].Trim(), venueArray[1].Trim(), venueArray[2].Trim());
-                    Venues.Add(venue);
+                    var raceArray = r.Split('|');
+                    var race = new Race(raceArray[0].Trim(), raceArray[1].Trim(), raceArray[2].Trim());
+                    Races.Add(race);
                 }                
                 
-                venueListView.ItemsSource = Venues;
+                raceListView.ItemsSource = Races;
                 //BindingContext = this;
             }
             catch (Exception e)
@@ -80,25 +79,21 @@ namespace EssentialUIKit.Views.Catalog
             {
                 return;
             }
-            var assembly = typeof(App).GetTypeInfo().Assembly;
-            var pageName = "ListRacesPage";
-            //var template = new Template("Races", "List Races", pageName, false, "", true);
-            Routing.RegisterRoute("ListRaces",
-                assembly.GetType($"EssentialUIKit.{pageName}"));
-            Navigation.PushAsync(new ListRacesPage(e.SelectedItem as Venue));
+
+            Navigation.PushAsync(new ListRunnersPage(e.SelectedItem as Race));
         }
     }
 
-    public class Venue
+    public class Race
     {
-        public Venue(String name, String description, String id)
+        public Race(String name, String time, String id)
         {
             Name = name;
-            Description = description;
+            Time = time;
             Id = id;
         }
         public String Name { get; set; }
-        public String Description { get; set; }
+        public String Time { get; set; }
         public String Id { get; set; }
     }
 }

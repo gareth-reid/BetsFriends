@@ -93,7 +93,7 @@
                                     FontFamily="{StaticResource Montserrat-Regular}"
                                     Text="{Binding ArticleDate}"
                                     TextColor="{DynamicResource Gray-700}" />
-                                <Span Text=" | " TextColor="{DynamicResource Gray-700}" />
+                                <Span Text="|" TextColor="{DynamicResource Gray-700}" />
                                 <Span
                                     FontFamily="{StaticResource Montserrat-Regular}"
                                     Text="{Binding ArticleReadingTime}"

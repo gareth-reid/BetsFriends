@@ -332,7 +332,7 @@ namespace EssentialUIKit.ViewModels.Bookmarks
                     this.percent += wishlistDetail.DiscountPercent;
                 }
 
-                this.DiscountPercent = this.percent > 0 ? this.percent / this.WishlistDetails.Count : 0;
+                this.DiscountPercent = this.percent > 0 ? this.percent/this.WishlistDetails.Count : 0;
             }
         }
 

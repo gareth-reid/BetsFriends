@@ -23,7 +23,7 @@ namespace Betfair.ESASwagger.Model
         /// Initializes a new instance of the <see cref="MarketChange" />class.
         /// </summary>
         /// <param name="Rc">Runner Changes - a list of changes to runners (or null if un-changed).</param>
-        /// <param name="Img">Image - replace existing prices / data with the data supplied: it is not a delta (or null if delta).</param>
+        /// <param name="Img">Image - replace existing prices/data with the data supplied: it is not a delta (or null if delta).</param>
         /// <param name="Tv">The total amount matched across the market. This value is truncated at 2dp (or null if un-changed).</param>
         /// <param name="Con">Conflated - have more than a single change been combined (or null if not conflated).</param>
         /// <param name="MarketDefinition">Market Definition - the definition of the market (or null if un-changed).</param>
@@ -49,9 +49,9 @@ namespace Betfair.ESASwagger.Model
         public List<RunnerChange> Rc { get; set; }
     
         /// <summary>
-        /// Image - replace existing prices / data with the data supplied: it is not a delta (or null if delta)
+        /// Image - replace existing prices/data with the data supplied: it is not a delta (or null if delta)
         /// </summary>
-        /// <value>Image - replace existing prices / data with the data supplied: it is not a delta (or null if delta)</value>
+        /// <value>Image - replace existing prices/data with the data supplied: it is not a delta (or null if delta)</value>
         [DataMember(Name="img", EmitDefaultValue=false)]
         public bool? Img { get; set; }
     

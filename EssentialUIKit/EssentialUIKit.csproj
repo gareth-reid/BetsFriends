@@ -41,6 +41,8 @@
     <PackageReference Include="Syncfusion.Xamarin.Core" Version="17.4.0.44" />
     <PackageReference Include="NETStandard.Library" Version="2.0.3" />
     <PackageReference Include="System.Linq" Version="4.3.0" />
+    <PackageReference Include="Newtonsoft.Json" Version="12.0.3" />
+    <PackageReference Include="System.Net.Http" Version="4.3.4" />
   </ItemGroup>
   <ItemGroup>
     <None Remove="AppLayout\Icons\bookmark.png" />
@@ -133,6 +135,10 @@
     <EmbeddedResource Include="Images\WaterConsumed.svg" />
   </ItemGroup>
   
+  <ItemGroup>
+    <Compile Remove="Views\Catalog\ListRacesPage %28copy%29.xaml.cs" />
+    <Compile Remove="Views\Catalog\ListVenuesPage %28copy%29.xaml.cs" />
+  </ItemGroup>
   <ItemGroup>
     <Compile Update="Views\Catalog\ListVenuesPage.xaml.cs">
         <DependentUpon>ListVenuesPage.xaml</DependentUpon>

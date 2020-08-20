@@ -178,7 +178,7 @@
                                             <FormattedString>
                                                 <Span Text="{Binding Items}" FontFamily="{DynamicResource Montserrat-Medium}" />
                                                 <Span Text=" " />
-                                                <Span Text=" | " />
+                                                <Span Text="|" />
                                                 <Span Text=" " />
                                                 <Span Text="{Binding DateTime}" FontFamily="{DynamicResource Montserrat-Medium}" />
                                             </FormattedString>

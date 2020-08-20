@@ -214,7 +214,7 @@ namespace EssentialUIKit.ViewModels.Detail
             }
 
             if (this.productRating > 0)
-                this.RoomDetail.OverallRating = this.productRating / this.RoomDetail.Reviews.Count;
+                this.RoomDetail.OverallRating = this.productRating/this.RoomDetail.Reviews.Count;
         }
 
         #endregion

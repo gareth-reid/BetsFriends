@@ -20,7 +20,7 @@ namespace Betfair.ESAClient
         private readonly Client _client;
 
         /// <summary>
-        /// Construct a new cache to consume from / wrap the specified client.
+        /// Construct a new cache to consume from/wrap the specified client.
         /// </summary>
         /// <param name="client"></param>
         public ClientCache(Client client)

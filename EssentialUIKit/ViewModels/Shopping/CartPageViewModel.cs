@@ -376,7 +376,7 @@ namespace EssentialUIKit.ViewModels.Shopping
                     this.percent += cartDetail.DiscountPercent;
                 }
 
-                this.DiscountPercent = this.percent > 0 ? this.percent / this.CartDetails.Count : 0;
+                this.DiscountPercent = this.percent > 0 ? this.percent/this.CartDetails.Count : 0;
             }
         }
 

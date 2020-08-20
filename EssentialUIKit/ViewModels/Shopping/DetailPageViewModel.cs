@@ -108,7 +108,7 @@ namespace EssentialUIKit.ViewModels.Shopping
             }
 
             if (this.productRating > 0)
-                this.ProductDetail.OverallRating = this.productRating / this.ProductDetail.Reviews.Count;
+                this.ProductDetail.OverallRating = this.productRating/this.ProductDetail.Reviews.Count;
 
             this.Categories = new ObservableCollection<Category>
             {

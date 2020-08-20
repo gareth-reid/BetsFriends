@@ -86,7 +86,7 @@
             <Label.FormattedText>
                 <FormattedString>
                     <Span Text="{Binding Date}" />
-                    <Span Text=" | " />
+                    <Span Text="|" />
                     <Span Text="{Binding AverageReadingTime}" />
                 </FormattedString>
             </Label.FormattedText>

@@ -33,7 +33,7 @@ namespace EssentialUIKit.Views.ContactUs
             {
                 if (Device.Idiom == TargetIdiom.Desktop || Device.Idiom == TargetIdiom.Tablet)
                 {
-                    this.frameWidth = width / 2;
+                    this.frameWidth = width/2;
                     MainStack.Orientation = StackOrientation.Horizontal;
                     MainFrame.VerticalOptions = LayoutOptions.FillAndExpand;
                     MainFrame.Margin = new Thickness(0);
@@ -66,8 +66,8 @@ namespace EssentialUIKit.Views.ContactUs
         {
             if (Device.Idiom == TargetIdiom.Tablet)
             {
-                MainFrame.HeightRequest = height / 2;
-                Map.HeightRequest = height / 2;
+                MainFrame.HeightRequest = height/2;
+                Map.HeightRequest = height/2;
                 MainStack.Orientation = StackOrientation.Vertical;
                 MainFrame.VerticalOptions = LayoutOptions.End;
                 MainFrame.Margin = new Thickness(0);

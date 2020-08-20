@@ -69,10 +69,10 @@ namespace EssentialUIKit.Controls
                 SkiaSharp.Extended.Svg.SKSvg skSVG = new SkiaSharp.Extended.Svg.SKSvg();
                 skSVG.Load(stream);
                 SKImageInfo imageInfo = args.Info;
-                skCanvas.Translate(imageInfo.Width / 2f, imageInfo.Height / 2f);
+                skCanvas.Translate(imageInfo.Width/2f, imageInfo.Height/2f);
                 SKRect rectBounds = skSVG.ViewBox;
-                float xRatio = imageInfo.Width / rectBounds.Width;
-                float yRatio = imageInfo.Height / rectBounds.Height;
+                float xRatio = imageInfo.Width/rectBounds.Width;
+                float yRatio = imageInfo.Height/rectBounds.Height;
                 float minRatio = Math.Min(xRatio, yRatio);
                 skCanvas.Scale(minRatio);
                 skCanvas.Translate(-rectBounds.MidX, -rectBounds.MidY);

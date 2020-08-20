@@ -55,8 +55,8 @@ namespace BetfairNG
 
         public static double GetMarketEfficiency(IEnumerable<double> odds)
         {
-            double total = odds.Sum(c => 1.0 / c);
-            return 1.0 / total;
+            double total = odds.Sum(c => 1.0/c);
+            return 1.0/total;
         }
 
         public static double Best(this List<Data.PriceSize> prices)
