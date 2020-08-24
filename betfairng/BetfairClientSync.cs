@@ -36,7 +36,7 @@ namespace BetfairNG
             string password, 
             string loginUrl="https://identitysso-cert.betfair.com/api/certlogin")
         {
-            return client.Login(p12CertificateLocation, p12CertificatePassword, username, password, loginUrl);
+            return client.Login(p12CertificateLocation, p12CertificatePassword, username, password, null, loginUrl);
         }
 
         public BetfairServerResponse<KeepAliveResponse> KeepAlive()

@@ -18,7 +18,7 @@ namespace EssentialUIKit.Views.Catalog
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class ListRacesPage
     {
-        private const string _betfairApi = "http://192.168.1.6:7071/api/BFRaces?mock=true&";
+        private const string _betfairApi = "http://betsfriendsapi.azurewebsites.net/api/BFRaces?";
         private HttpClient _client = new HttpClient();
         private Venue _venue;
         public ObservableCollection<Race> Races { get; } = new ObservableCollection<Race>();
@@ -41,12 +41,14 @@ namespace EssentialUIKit.Views.Catalog
             {
                 SetActivity(true);
                 var content = await _client.GetStringAsync(_betfairApi + "id=" + _venue.Id);
-                var races = JsonConvert.DeserializeObject<List<string>>(content);
+                var races = JsonConvert.DeserializeObject<List<Tuple< DateTime, String>>>(content);
                 
-                foreach ( string r in races)
+                foreach (Tuple<DateTime, String> r in races)
                 {
-                    var raceArray = r.Split('|');
-                    var race = new Race(raceArray[0].Trim(), raceArray[1].Trim(), raceArray[2].Trim());
+                    var racetTime = r.Item1.ToLocalTime().ToString("dd/MM hh:mm tt");
+                    var raceArray = r.Item2.Split('|');
+                    var race = new Race(raceArray[0].Trim(),
+                        racetTime, raceArray[2].Trim());
                     Races.Add(race);
                 }                
                 

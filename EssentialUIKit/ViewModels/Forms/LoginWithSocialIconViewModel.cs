@@ -1,9 +1,25 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Threading.Tasks;
+using EssentialUIKit.AppLayout.Views;
+using EssentialUIKit.Views.Catalog;
+using Newtonsoft.Json;
+using Plugin.GoogleClient;
+using Plugin.GoogleClient.Shared;
 using Xamarin.Forms;
 using Xamarin.Forms.Internals;
 
 namespace EssentialUIKit.ViewModels.Forms
 {
+    public class AuthNetwork
+    {
+        public string Name { get; set; }
+
+        public string Icon { get; set; }
+
+        public string Background { get; set; }
+
+        public string Foreground { get; set; }
+    }
     /// <summary>
     /// ViewModel for login with social icon page.
     /// </summary>
@@ -13,6 +29,7 @@ namespace EssentialUIKit.ViewModels.Forms
         #region Fields
 
         private string password;
+        public INavigation Navigation { get; set; }
 
         #endregion
 
@@ -28,11 +45,72 @@ namespace EssentialUIKit.ViewModels.Forms
             this.ForgotPasswordCommand = new Command(this.ForgotPasswordClicked);
             this.FaceBookLoginCommand = new Command(this.FaceBookClicked);
             this.TwitterLoginCommand = new Command(this.TwitterClicked);
-            this.GmailLoginCommand = new Command(this.GmailClicked);
+            this.GmailLoginCommand = new Command<AuthNetwork>(async (data) => await LoginGoogleAsync(data));
+
         }
 
         #endregion
+        #region GOOGLE
+        IGoogleClientManager _googleService = CrossGoogleClient.Current;
 
+        async Task LoginGoogleAsync(AuthNetwork authNetwork)
+        {
+            try
+            {
+                /*if (!string.IsNullOrEmpty(_googleService.AccessToken))
+                {
+                    //Always require user authentication
+                    _googleService.Logout();
+                }*/
+
+                EventHandler<GoogleClientResultEventArgs<GoogleUser>> userLoginDelegate = null;
+                userLoginDelegate = async (object sender, GoogleClientResultEventArgs<GoogleUser> e) =>
+                {
+                    switch (e.Status)
+                    {
+                        case GoogleActionStatus.Completed:
+#if DEBUG
+                            var googleUserString = JsonConvert.SerializeObject(e.Data);
+                            int d = 0;
+                            //Debug.WriteLine($"Google Logged in succesfully: {googleUserString}");
+#endif
+                            int i = 0;
+                            /*var socialLoginData = new NetworkAuthData
+                            {
+                                Id = e.Data.Id,
+                                Logo = authNetwork.Icon,
+                                Foreground = authNetwork.Foreground,
+                                Background = authNetwork.Background,
+                                Picture = e.Data.Picture.AbsoluteUri,
+                                Name = e.Data.Name,
+                            };*/
+
+                            await App.Current.MainPage.Navigation.PushModalAsync(new HomePage());
+                            break;
+                        case GoogleActionStatus.Canceled:
+                            await App.Current.MainPage.DisplayAlert("Google Auth", "Canceled", "Ok");
+                            break;
+                        case GoogleActionStatus.Error:
+                            await App.Current.MainPage.DisplayAlert("Google Auth", "Error", "Ok");
+                            break;
+                        case GoogleActionStatus.Unauthorized:
+                            await App.Current.MainPage.DisplayAlert("Google Auth", "Unauthorized", "Ok");
+                            break;
+                    }
+
+                    _googleService.OnLogin -= userLoginDelegate;
+                };
+
+                _googleService.OnLogin += userLoginDelegate;
+
+                await _googleService.LoginAsync();
+            }
+            catch (Exception ex)
+            {
+                //Debug.WriteLine(ex.ToString());
+            }
+        }
+#endregion
         #region property
 
         /// <summary>
@@ -101,6 +179,8 @@ namespace EssentialUIKit.ViewModels.Forms
         /// <param name="obj">The Object</param>
         private void LoginClicked(object obj)
         {
+            App.Current.MainPage = new NavigationPage(new HomePage());            
+            //Navigation.PushAsync(new HomePage());            
             // Do something
         }
 
@@ -149,7 +229,7 @@ namespace EssentialUIKit.ViewModels.Forms
         /// <param name="obj">The Object</param>
         private void GmailClicked(object obj)
         {
-            // Do something
+            
         }
 
         #endregion

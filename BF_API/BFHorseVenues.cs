@@ -11,6 +11,8 @@ using BetfairNG;
 using BetfairNG.Data;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Caching;
+using BF_API.CacheManager;
 
 namespace BF_API
 {
@@ -19,22 +21,25 @@ namespace BF_API
         [FunctionName("BFHorseVenues")]
         public static IActionResult Run(
             [HttpTrigger(AuthorizationLevel.Anonymous, "get", "post", Route = null)] HttpRequest req,
-            ILogger log)
+            ILogger log, ExecutionContext context)
         {
             log.LogInformation("BFHorseVenues BetFair API accessed, Date:" + new DateTime().ToString());
 
-            bool mock = req.Query["mock"].ToString() != "";
-
             List<string> venues = new List<string>();
-            if (!mock)
+            
+            ICacheManager< List<string>> cacheManager = new CacheManager<List<string>>();
+            var data = cacheManager.GetItem("HorseVenues");
+            if (data != null)
             {
-                BetfairClient client = new BetfairClient("UhwmsL3EqCwjEKwH");
-                client.Login(@"/etc/client-2048.p12", "REDsky.123", "garethreid123@gmail.com", "REDsky.123");
-                venues = GetVenues(client);
-            } else
-            {
-                venues = MockGetVenues();
+                venues = data;
             }
+            else
+            {
+                var apiConfig = new ApiConfig(context);
+                log.LogInformation("");
+                venues = GetVenues(apiConfig.BetfairClient);
+                cacheManager.SetItem("HorseVenues", venues, DateTimeOffset.Now.AddHours(1));
+            }            
             
             string responseMessage = $"Hello, {venues}. This HTTP triggered function executed successfully.";
             
@@ -53,7 +58,7 @@ namespace BF_API
             marketFilter.MarketStartTime = new TimeRange()
             {
                 From = DateTime.Now,
-                To = DateTime.Now.AddDays(2)
+                To = DateTime.Now.AddDays(3)
             };
             marketFilter.MarketTypeCodes = new HashSet<String>() { "WIN" };
             //var events = client.ListEvents(marketFilter).Result;

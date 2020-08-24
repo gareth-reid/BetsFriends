@@ -21,7 +21,7 @@ namespace EssentialUIKit.Views.Catalog
     public partial class ListRunnersPage
     {
         //192.168.1.6
-        private const string _betfairApi = "http://192.168.1.6:7071/api/BFHorseRunners?";//?mock=true";
+        private const string _betfairApi = "http://betsfriendsapi.azurewebsites.net/api/BFHorseRunners?";//?mock=true";
         private HttpClient _client = new HttpClient();
         private Race _race;
         public ObservableCollection<Runner> Runners { get; } = new ObservableCollection<Runner>();
@@ -49,7 +49,7 @@ namespace EssentialUIKit.Views.Catalog
                 foreach ( string r in runners)
                 {
                     var runnerArray = r.Split('|');
-                    var runner = new Runner(runnerArray[0].Trim(), runnerArray[1].Trim(), runnerArray[2].Trim());
+                    var runner = new Runner(runnerArray[0].Trim(), runnerArray[1].Trim(), runnerArray[2].Trim(), runnerArray[3].Trim());
                     Runners.Add(runner);
                 }                
                 
@@ -93,11 +93,12 @@ namespace EssentialUIKit.Views.Catalog
 
     public class Runner
     {
-        public Runner(String name, string metaData, String id)
+        public Runner(String name, string metaData, String id, String price)
         {
             Name = name;
             Id = id;
             BuildMetadata(metaData);
+            Price = price;
         }
         public String Name { get; set; }
         public RunnerMetaData MetaData { get; set; }
@@ -107,6 +108,7 @@ namespace EssentialUIKit.Views.Catalog
         }
 
         public String Id { get; set; }
+        public String Price { get; set; }        
 
         public void BuildMetadata(string metaData)
         {

@@ -11,6 +11,8 @@ using BetfairNG;
 using BetfairNG.Data;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
+using BF_API.CacheManager;
 
 namespace BF_API
 {
@@ -19,23 +21,25 @@ namespace BF_API
         [FunctionName("BFHorseRunners")]
         public static IActionResult Run(
             [HttpTrigger(AuthorizationLevel.Anonymous, "get", "post", Route = null)] HttpRequest req,
-            ILogger log)
+            ILogger log, ExecutionContext context)
         {
             log.LogInformation("BFHorses BetFair API accessed, Date:" + new DateTime().ToString());
 
-            bool mock = req.Query["mock"].ToString() != "";
             string raceId = req.Query["id"].ToString();
 
             List<string> runners = new List<string>();
-            if (!mock)
+            ICacheManager<List<string>> cacheManager = new CacheManager<List<string>>();
+            var data = cacheManager.GetItem("HorseRunners");
+            if (data != null)
             {
-                BetfairClient client = new BetfairClient("UhwmsL3EqCwjEKwH");
-                client.Login(@"/etc/client-2048.p12", "REDsky.123", "garethreid123@gmail.com", "REDsky.123");
-                runners = GetRunners(client, raceId);
+                runners = data;
             }
             else
             {
-                runners = MockGetRunners();
+                var apiConfig = new ApiConfig(context);
+                log.LogInformation("");
+                runners = GetRunners(apiConfig.BetfairClient, raceId);
+                cacheManager.SetItem("HorseRunners", runners, DateTimeOffset.Now.AddHours(1));
             }
 
             return new OkObjectResult(runners);
@@ -57,15 +61,20 @@ namespace BF_API
               MarketSort.FIRST_TO_START,
               100).Result.Response;
 
-            var runners = marketCatalogues.First().Runners.Select(runner =>
+            var marketIds = new HashSet<String>() { raceId };
+            var marketBooks = client.ListMarketBook(marketIds).Result.Response;
+            List<Runner> runnersForMarket = marketBooks.First().Runners;
+
+            var runners = marketCatalogues.First().Runners.Select(runner =>                 
                  runner.RunnerName + "|" +
                  runner.Metadata.GetValueOrDefault("JOCKEY_NAME") +
                  "^" + runner.Metadata.GetValueOrDefault("TRAINER_NAME") +
                  "^" + runner.Metadata.GetValueOrDefault("WEIGHT_VALUE") +
                  "^" + runner.Metadata.GetValueOrDefault("FORM") +
                  "^" + runner.Metadata.GetValueOrDefault("STALL_DRAW") +
-                 "|" + runner.SelectionId
-            );
+                 "|" + runner.SelectionId +
+                 "|" + runnersForMarket.Find(rfm => rfm.SelectionId == runner.SelectionId).LastPriceTraded
+            ); ;
             //{[WEIGHT_VALUE,]}
             //{[JOCKEY_NAME, T P Mccarthy]}
             //{[TRAINER_NAME, T J Munday]}

@@ -20,7 +20,7 @@ namespace EssentialUIKit.Views.Catalog
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class ListVenuesPage
     {
-        private const string _betfairApi = "http://192.168.1.6:7071/api/BFHorseVenues?mock=true";//?mock=true";
+        private const string _betfairApi = "http://betsfriendsapi.azurewebsites.net/api/BFHorseVenues?";//?mock=true";
         private HttpClient _client = new HttpClient();
 
         public ObservableCollection<Venue> Venues { get; } = new ObservableCollection<Venue>();

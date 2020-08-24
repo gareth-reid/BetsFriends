@@ -19,6 +19,7 @@ using Syncfusion.XForms.iOS.TabView;
 using Syncfusion.SfGauge.XForms.iOS;
 using UIKit;
 using Xamarin.Forms;
+using Plugin.GoogleClient;
 
 namespace EssentialUIKit.iOS
 {
@@ -37,6 +38,7 @@ namespace EssentialUIKit.iOS
         {
             Forms.SetFlags("CollectionView_Experimental");
             global::Xamarin.Forms.Forms.Init();
+            GoogleClientManager.Initialize();
             this.LoadApplication(new App());
             SfButtonRenderer.Init();
             SfCheckBoxRenderer.Init();
@@ -78,6 +80,12 @@ namespace EssentialUIKit.iOS
             }
 
             return result;
+        }
+
+        [Export("application:openURL:options:")]
+        public bool OpenUrl(UIApplication app, NSUrl url, NSDictionary options)
+        {
+            return GoogleClientManager.OnOpenUrl(app, url, options);
         }
     }
 }

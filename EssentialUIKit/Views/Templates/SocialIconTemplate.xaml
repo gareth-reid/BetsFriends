@@ -20,11 +20,12 @@
                                             Text="{StaticResource FaceBook}" TextColor="{StaticResource Gray-White}"/>
 
         <buttons:SfButton   BackgroundColor="{DynamicResource TwitterBlue}" HorizontalOptions="Center"
-                                            Style="{StaticResource SocialIconButtonStyle}"  Command="{Binding TwitterLoginCommand}"
+                                            Style="{StaticResource SocialIconButtonStyle}" Command="{Binding TwitterLoginCommand}"
                                             Text="{StaticResource Twitter}" />
 
         <buttons:SfButton  BackgroundColor="{DynamicResource Red}" HorizontalOptions="End"
                                             Style="{StaticResource SocialIconButtonStyle}"  Command="{Binding GmailLoginCommand}"
+                                            CommandParameter="Google"
                                             Text="{StaticResource Google}"/>
 
     </Grid>

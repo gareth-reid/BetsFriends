@@ -38,12 +38,12 @@
            <ActivityIndicator HorizontalOptions="Center" VerticalOptions="Center" 
             IsRunning="{Binding Source={x:Reference raceListView}}" 
             x:Name="activity"/>
-               <controls:ParallaxListView
+               <ListView
                 x:Name="raceListView"
                 HasUnevenRows="True"
                 ItemsSource="{Binding Races}"
                 RowHeight="85"
-                SelectionChanged="ListView_OnSelectionChanged"
+                ItemSelected="ListView_OnSelectionChanged"
                 SeparatorVisibility="Default">                
                 <ListView.ItemTemplate>
 	                <DataTemplate > 
@@ -77,7 +77,7 @@
                         </ViewCell>
 		            </DataTemplate>
                 </ListView.ItemTemplate>
-           </controls:ParallaxListView>
+           </ListView>
          </StackLayout>
         </border:SfBorder>
 

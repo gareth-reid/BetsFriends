@@ -2,6 +2,7 @@
 using Android.Content.PM;
 using Android.OS;
 using Android.Views;
+using Plugin.GoogleClient;
 using Xamarin.Forms;
 using Xamarin.Forms.PlatformConfiguration.AndroidSpecific;
 
@@ -11,6 +12,12 @@ namespace EssentialUIKit.Droid
 
     public class MainActivity : global::Xamarin.Forms.Platform.Android.FormsAppCompatActivity
     {
+        protected override void OnActivityResult(int requestCode, Result resultCode, Android.Content.Intent data)
+        {
+            base.OnActivityResult(requestCode, resultCode, data);
+            GoogleClientManager.OnAuthCompleted(requestCode, resultCode, data);
+        }
+
         protected override void OnCreate(Bundle savedInstanceState)
         {   
             Window.AddFlags(WindowManagerFlags.DrawsSystemBarBackgrounds);
@@ -24,7 +31,8 @@ namespace EssentialUIKit.Droid
             Syncfusion.XForms.Android.PopupLayout.SfPopupLayoutRenderer.Init();
 
             Syncfusion.XForms.Android.Core.Core.Init(this);
-            
+            GoogleClientManager.Initialize(this);
+
             this.LoadApplication(new App());
 
             // Change the status bar color

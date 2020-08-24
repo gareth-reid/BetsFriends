@@ -11,6 +11,7 @@ using BetfairNG;
 using BetfairNG.Data;
 using System.Collections.Generic;
 using System.Linq;
+using BF_API.CacheManager;
 
 namespace BF_API
 {
@@ -19,33 +20,35 @@ namespace BF_API
         [FunctionName("BFRaces")]
         public static IActionResult Run(
             [HttpTrigger(AuthorizationLevel.Anonymous, "get", "post", Route = null)] HttpRequest req,
-            ILogger log)
+            ILogger log, ExecutionContext context)
         {
             log.LogInformation("BFHorses BetFair API accessed, Date:" + new DateTime().ToString());
 
-            bool mock = req.Query["mock"].ToString() != "";
             string venueId = req.Query["id"].ToString();
 
-            List<string> races = new List<string>();
-            if (!mock)
+            List<Tuple<DateTime, string>> races = new List<Tuple<DateTime, string>>();            
+            ICacheManager<List<Tuple<DateTime, string>>> cacheManager = new CacheManager<List<Tuple<DateTime, string>>> ();
+            var data = cacheManager.GetItem("Races");
+            if (data != null)
             {
-                BetfairClient client = new BetfairClient("UhwmsL3EqCwjEKwH");
-                client.Login(@"/etc/client-2048.p12", "REDsky.123", "garethreid123@gmail.com", "REDsky.123");
-                races = GetRaces(client, venueId);
+                races = data;
             }
             else
             {
-                races = MockGetRaces();
-            }            
+                var apiConfig = new ApiConfig(context);
+                log.LogInformation("");
+                races = GetRaces(apiConfig.BetfairClient, venueId);
+                cacheManager.SetItem("Races", races, DateTimeOffset.Now.AddHours(1));
+            }
 
             return new OkObjectResult(races);
         }
-        public static List<string> MockGetRaces()
+        public static List<Tuple<DateTime, string>> MockGetRaces()
         {
-            List<string> races = new List<string>(new string[] { "R1 1100m Mdn|8/21/2020 11:03:00 AM|1.172218585", "R2 1100m Mdn|8/21/2020 11:38:00 AM|1.172218587", "R3 1100m 3yo|8/21/2020 12:17:00 PM|1.172218589", "R4 1100m 3yo|8/21/2020 12:52:00 PM|1.172218591", "R5 1400m Mdn|8/21/2020 1:27:00 PM|1.172218593", "R6 860m Hcap|8/21/2020 2:04:00 PM|1.172218595", "R7 1100m Hcap|8/21/2020 2:42:00 PM|1.172218597", "R8 1100m Hcap|8/21/2020 3:17:00 PM|1.172218599", "R9 1400m Hcap|8/21/2020 3:57:00 PM|1.172218601", "R10 1400m Hcap|8/21/2020 4:34:00 PM|1.172218603" });
+            List<Tuple<DateTime, string>> races = new List<Tuple<DateTime, string>>();// new List<string>(new string[] { "R1 1100m Mdn|8/21/2020 11:03:00 AM|1.172218585", "R2 1100m Mdn|8/21/2020 11:38:00 AM|1.172218587", "R3 1100m 3yo|8/21/2020 12:17:00 PM|1.172218589", "R4 1100m 3yo|8/21/2020 12:52:00 PM|1.172218591", "R5 1400m Mdn|8/21/2020 1:27:00 PM|1.172218593", "R6 860m Hcap|8/21/2020 2:04:00 PM|1.172218595", "R7 1100m Hcap|8/21/2020 2:42:00 PM|1.172218597", "R8 1100m Hcap|8/21/2020 3:17:00 PM|1.172218599", "R9 1400m Hcap|8/21/2020 3:57:00 PM|1.172218601", "R10 1400m Hcap|8/21/2020 4:34:00 PM|1.172218603" });
             return races;
         }
-        public static List<string> GetRaces(BetfairClient client, string venueId)
+        public static List<Tuple<DateTime, string>> GetRaces(BetfairClient client, string venueId)
         {
             var marketFilter = new MarketFilter();
             marketFilter.EventIds = new HashSet<string>() { venueId };            
@@ -59,7 +62,8 @@ namespace BF_API
               100).Result.Response;
 
             var races = marketCatalogues.Select(race =>
-                 race.MarketName + "|" + race.Description.MarketTime.ToLocalTime() + "|" + race.MarketId
+                 new Tuple<DateTime, String> (race.Description.MarketTime,
+                    race.MarketName + "|" + "|" + race.MarketId)
             );
 
             return races.ToList();        

@@ -1,4 +1,5 @@
-﻿using Xamarin.Forms;
+﻿using EssentialUIKit.ViewModels.Forms;
+using Xamarin.Forms;
 using Xamarin.Forms.Internals;
 using Xamarin.Forms.Xaml;
 
@@ -13,7 +14,7 @@ namespace EssentialUIKit.Views.Templates
     {
         public SocialIconTemplate()
         {
-            InitializeComponent();
+            InitializeComponent();           
         }
     }
 }
