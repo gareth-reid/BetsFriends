@@ -1,7 +1,14 @@
 {
-    "IsEncrypted": false,
-    "Values": {
-        "AzureWebJobsStorage": "UseDevelopmentStorage=true",
-        "FUNCTIONS_WORKER_RUNTIME": "dotnet"
+  "IsEncrypted": false,
+  "Values": {
+    "AzureWebJobsStorage": "UseDevelopmentStorage=true",
+    "FUNCTIONS_WORKER_RUNTIME": "dotnet"
+  },
+
+  "connectionStrings": {
+    "azurebetsfriendsconnstring": {
+      "ConnectionString": "Server=tcp:betsfriendssql.database.windows.net,1433;Initial Catalog=BetsFriends;Persist Security Info=False;User ID=BetsFriends;Password=REDsky.123;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;",
+      "ProviderName": "System.Data.SqlClient"
     }
+  }
 }

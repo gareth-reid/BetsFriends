@@ -70,7 +70,7 @@
                                 <Label Grid.Row="0" Grid.Column="2"
                                            Margin="8,8,8,8"
                                            HorizontalTextAlignment="End"
-                                           Text="{Binding Price}"                                        
+                                           Text="{Binding DisplayPrice}"
                                            TextColor="{DynamicResource Gray-900}"
                                            FontSize="16"
                                            FontFamily="{DynamicResource Montserrat-SemiBold}"

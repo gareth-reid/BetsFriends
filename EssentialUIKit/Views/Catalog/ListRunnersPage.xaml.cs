@@ -108,7 +108,15 @@ namespace EssentialUIKit.Views.Catalog
         }
 
         public String Id { get; set; }
-        public String Price { get; set; }        
+        public String Price { get; set; }
+
+        public String DisplayPrice
+        {
+            get
+            {
+                return "$" + Price;
+            }            
+        }
 
         public void BuildMetadata(string metaData)
         {

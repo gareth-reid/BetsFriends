@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using EssentialUIKit.AppLayout.Views;
 using EssentialUIKit.Views.Catalog;
+using EssentialUIKit.Views.Forms;
 using Newtonsoft.Json;
 using Plugin.GoogleClient;
 using Plugin.GoogleClient.Shared;
@@ -190,7 +191,7 @@ namespace EssentialUIKit.ViewModels.Forms
         /// <param name="obj">The Object</param>
         private void SignUpClicked(object obj)
         {
-            // Do something
+            App.Current.MainPage = new NavigationPage(new SimpleSignUpPage());
         }
 
         /// <summary>

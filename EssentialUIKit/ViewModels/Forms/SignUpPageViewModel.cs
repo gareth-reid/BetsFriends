@@ -1,4 +1,5 @@
-﻿using Xamarin.Forms;
+﻿using EssentialUIKit.AppLayout.Views;
+using Xamarin.Forms;
 using Xamarin.Forms.Internals;
 
 namespace EssentialUIKit.ViewModels.Forms
@@ -132,8 +133,8 @@ namespace EssentialUIKit.ViewModels.Forms
         /// </summary>
         /// <param name="obj">The Object</param>
         private void SignUpClicked(object obj)
-        {
-            // Do something
+        {            
+            App.Current.MainPage = new NavigationPage(new HomePage());
         }
 
         #endregion
