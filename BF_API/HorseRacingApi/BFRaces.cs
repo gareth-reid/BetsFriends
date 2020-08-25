@@ -12,6 +12,7 @@ using BetfairNG.Data;
 using System.Collections.Generic;
 using System.Linq;
 using BF_API.CacheManager;
+using BF_API.Data.Engine;
 
 namespace BF_API
 {
@@ -22,23 +23,26 @@ namespace BF_API
             [HttpTrigger(AuthorizationLevel.Anonymous, "get", "post", Route = null)] HttpRequest req,
             ILogger log, ExecutionContext context)
         {
-            log.LogInformation("BFHorses BetFair API accessed, Date:" + new DateTime().ToString());
+            log.LogInformation("BFRaces BetFair API accessed, Date:" + new DateTime().ToString());
+            List<Tuple<DateTime, string>> races = new List<Tuple<DateTime, string>>();
 
             string venueId = req.Query["id"].ToString();
-
-            List<Tuple<DateTime, string>> races = new List<Tuple<DateTime, string>>();            
-            ICacheManager<List<Tuple<DateTime, string>>> cacheManager = new CacheManager<List<Tuple<DateTime, string>>> ();
-            var data = cacheManager.GetItem("Races");
-            if (data != null)
+            if (venueId != null)
             {
-                races = data;
-            }
-            else
-            {
-                var apiConfig = new ApiConfig(context);
-                log.LogInformation("");
-                races = GetRaces(apiConfig.BetfairClient, venueId);
-                cacheManager.SetItem("Races", races, DateTimeOffset.Now.AddHours(1));
+                string keyForRaceCache = "HorseRaces_" + venueId;
+                ICacheManager<List<Tuple<DateTime, string>>> cacheManager = new CacheManager<List<Tuple<DateTime, string>>> ();
+                var data = cacheManager.GetItem(keyForRaceCache);
+                if (data != null)
+                {
+                    races = data;
+                }
+                else
+                {
+                    var apiConfig = new ApiConfig(context);
+                    log.LogInformation("");
+                    races = GetRaces(apiConfig.BetfairClient, venueId);
+                    cacheManager.SetItem(keyForRaceCache, races, DateTimeOffset.Now.AddHours(1));
+                }
             }
 
             return new OkObjectResult(races);
@@ -60,6 +64,11 @@ namespace BF_API
               BFHelpers.HorseRaceProjection(),
               MarketSort.FIRST_TO_START,
               100).Result.Response;
+            VenueEngine venueEngine = new VenueEngine();
+            var venue = venueEngine.GetFromApiId(venueId);
+
+            RaceEngine raceEngine = new RaceEngine();            
+            raceEngine.Execute(marketCatalogues, venue);
 
             var races = marketCatalogues.Select(race =>
                  new Tuple<DateTime, String> (race.Description.MarketTime,

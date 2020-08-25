@@ -13,6 +13,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Security.Cryptography.X509Certificates;
 using BF_API.CacheManager;
+using BF_API.Data.Engine;
 
 namespace BF_API
 {
@@ -22,26 +23,28 @@ namespace BF_API
         public static IActionResult Run(
             [HttpTrigger(AuthorizationLevel.Anonymous, "get", "post", Route = null)] HttpRequest req,
             ILogger log, ExecutionContext context)
-        {
+        {            
             log.LogInformation("BFHorses BetFair API accessed, Date:" + new DateTime().ToString());
+            List<string> runners = new List<string>();
 
             string raceId = req.Query["id"].ToString();
-
-            List<string> runners = new List<string>();
-            ICacheManager<List<string>> cacheManager = new CacheManager<List<string>>();
-            var data = cacheManager.GetItem("HorseRunners");
-            if (data != null)
+            if (raceId != null)
             {
-                runners = data;
+                string keyForRunnersCache = "HorseRunners_" + raceId;                
+                ICacheManager<List<string>> cacheManager = new CacheManager<List<string>>();
+                var data = cacheManager.GetItem(keyForRunnersCache);
+                if (data != null)
+                {
+                    runners = data;
+                }
+                else
+                {
+                    var apiConfig = new ApiConfig(context);
+                    log.LogInformation("");
+                    runners = GetRunners(apiConfig.BetfairClient, raceId);
+                    cacheManager.SetItem(keyForRunnersCache, runners, DateTimeOffset.Now.AddHours(1));
+                }
             }
-            else
-            {
-                var apiConfig = new ApiConfig(context);
-                log.LogInformation("");
-                runners = GetRunners(apiConfig.BetfairClient, raceId);
-                cacheManager.SetItem("HorseRunners", runners, DateTimeOffset.Now.AddHours(1));
-            }
-
             return new OkObjectResult(runners);
         }
         public static List<string> MockGetRunners()
@@ -63,8 +66,14 @@ namespace BF_API
 
             var marketIds = new HashSet<String>() { raceId };
             var marketBooks = client.ListMarketBook(marketIds).Result.Response;
-            List<Runner> runnersForMarket = marketBooks.First().Runners;
 
+            List<Runner> runnersForMarket = marketBooks.First().Runners;
+            RunnerEngine runnerEngine = new RunnerEngine();
+
+            RaceEngine raceEngine = new RaceEngine();
+            var race = raceEngine.GetFromApiId(raceId);
+
+            runnerEngine.Execute(marketCatalogues.First().Runners, runnersForMarket, race);
             var runners = marketCatalogues.First().Runners.Select(runner =>                 
                  runner.RunnerName + "|" +
                  runner.Metadata.GetValueOrDefault("JOCKEY_NAME") +

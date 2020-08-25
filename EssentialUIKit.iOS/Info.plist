@@ -36,7 +36,7 @@
 	<key>CFBundleDisplayName</key>
 	<string>Xamarin UI Kit</string>
 	<key>CFBundleIdentifier</key>
-	<string>com.syncfusion.EssentialUIKit</string>
+	<string>com.worthalook.betsfriends</string>
 	<key>CFBundleVersion</key>
 	<string>1.0</string>
 	<key>UILaunchStoryboardName</key>
