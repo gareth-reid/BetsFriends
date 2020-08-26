@@ -13,13 +13,42 @@ namespace EssentialUIKit.AppLayout.ViewModels
     [QueryProperty("QueryData", "data1")]
     public class TemplatePageViewModel : INotifyPropertyChanged
     {
+        public TemplatePageViewModel()
+        {            
+            if (Application.Current.Properties.ContainsKey("name"))
+            {
+                displayName = Application.Current.Properties["name"] as string;
+            }
+            else
+            {
+                displayName = "LOGIN";
+            }            
+        }
+
+        public string DisplayName
+        {
+            get
+            {
+                return this.displayName;
+            }
+
+            set
+            {
+                if (this.displayName == value)
+                {
+                    return;
+                }
+
+                this.displayName = value;
+            }
+        }
         #region Fields
 
         /// <summary>
         /// Gets or sets the selected category.
         /// </summary>
         private Category selectedCategory;
-
+        private string displayName;
         #endregion
 
         #region event

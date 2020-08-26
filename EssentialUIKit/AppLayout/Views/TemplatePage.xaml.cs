@@ -1,6 +1,7 @@
 ﻿using System;
 using EssentialUIKit.AppLayout.Models;
 using EssentialUIKit.AppLayout.ViewModels;
+using EssentialUIKit.Views.Forms;
 using Xamarin.Forms;
 using Xamarin.Forms.Internals;
 using Xamarin.Forms.Xaml;
@@ -97,9 +98,9 @@ namespace EssentialUIKit.AppLayout.Views
             Navigation.PushAsync(new TemplateHostPage(e.SelectedItem as Template));
         }
 
-       private void GotoCodeViewer(object sender, EventArgs e)
+       private void Login(object sender, EventArgs e)
         {
-            Device.OpenUri(new Uri("https://github.com/syncfusion/essential-ui-kit-for-xamarin.forms"));
+            Navigation.PushAsync(new LoginWithSocialIconPage());
         }
 
        #endregion

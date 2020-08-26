@@ -12,7 +12,7 @@ namespace EssentialUIKit.AppLayout.ViewModels
     public class HomePageViewModel
     {
         private const string sampleListFile = "EssentialUIKit.AppLayout.TemplateList.xml";
-
+        private string displayName;
         public List<Category> Templates { get; set; }
 
         /// <summary>
@@ -20,9 +20,11 @@ namespace EssentialUIKit.AppLayout.ViewModels
         /// </summary>
         public HomePageViewModel()
         {
-            Templates = new List<Category>();
+            Templates = new List<Category>();            
             PopulateList();
         }
+
+        
 
         private void PopulateList()
         {

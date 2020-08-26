@@ -33,9 +33,18 @@ namespace EssentialUIKit
 #endif
 
             InitializeComponent();
+            
             Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense("MzAyNjQyQDMxMzcyZTM0MmUzME5yNnh2RDJFRmNnbDFLaE92b0Mya2dqTzVITE5uVmQzSjRNOXhzY3UveU09");
             // this.MainPage = new AppShell();
-            this.MainPage = new NavigationPage(new LoginWithSocialIconPage());
+            if (Application.Current.Properties.ContainsKey("name"))
+            {
+                this.MainPage = new NavigationPage(new HomePage());
+            }
+            else
+            {
+                this.MainPage = new NavigationPage(new LoginWithSocialIconPage());
+            }
+            
         }
 
         #endregion

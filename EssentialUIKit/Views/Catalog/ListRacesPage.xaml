@@ -11,7 +11,7 @@
              xmlns:template="clr-namespace:EssentialUIKit.Views.Templates"
              x:Class="EssentialUIKit.Views.Catalog.ListRacesPage"
              BackgroundColor="{DynamicResource Gray-White}"
-             NavigationPage.HasNavigationBar="False"
+             NavigationPage.HasNavigationBar="True"
              x:Name="listRacesPagee"
              Title="List Races">
 

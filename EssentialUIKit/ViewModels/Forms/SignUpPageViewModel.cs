@@ -1,9 +1,14 @@
-﻿using EssentialUIKit.AppLayout.Views;
+﻿using System.Collections.Generic;
+using System.Net.Http;
+using EssentialUIKit.AppLayout.Views;
+using EssentialUIKit.Views.Forms;
+using Newtonsoft.Json;
 using Xamarin.Forms;
 using Xamarin.Forms.Internals;
 
 namespace EssentialUIKit.ViewModels.Forms
 {
+
     /// <summary>
     /// ViewModel for sign-up page.
     /// </summary>
@@ -11,8 +16,10 @@ namespace EssentialUIKit.ViewModels.Forms
     public class SignUpPageViewModel : LoginViewModel
     {
         #region Fields
-
+        private const string _betfairApi = "http://betsfriendsapi.azurewebsites.net/api/AddUser?";//?mock=true";
+        private HttpClient _client = new HttpClient();
         private string name;
+        private string email;
 
         private string password;
 
@@ -53,6 +60,28 @@ namespace EssentialUIKit.ViewModels.Forms
                 }
 
                 this.name = value;
+                this.NotifyPropertyChanged();
+            }
+        }
+
+        /// <summary>
+        /// Gets or sets the property that bounds with an entry that gets the name from user in the Sign Up page.
+        /// </summary>
+        public string Email
+        {
+            get
+            {
+                return this.email;
+            }
+
+            set
+            {
+                if (this.email == value)
+                {
+                    return;
+                }
+
+                this.email = value;
                 this.NotifyPropertyChanged();
             }
         }
@@ -126,6 +155,7 @@ namespace EssentialUIKit.ViewModels.Forms
         private void LoginClicked(object obj)
         {
             // Do something
+            App.Current.MainPage = new NavigationPage(new LoginWithSocialIconPage());
         }
 
         /// <summary>
@@ -133,8 +163,19 @@ namespace EssentialUIKit.ViewModels.Forms
         /// </summary>
         /// <param name="obj">The Object</param>
         private void SignUpClicked(object obj)
-        {            
-            App.Current.MainPage = new NavigationPage(new HomePage());
+        {
+            if (email == null)
+            {                
+                App.Current.MainPage = new NavigationPage(new SignUpPage());
+            }
+            else
+            {                
+                var api = _betfairApi + "un=" + name + "&pw=" + password + "&em=" + email;
+                _client.GetStringAsync(api);
+                Application.Current.Properties.Add("name", name);
+                App.Current.MainPage = new NavigationPage(new HomePage());
+            }
+            
         }
 
         #endregion

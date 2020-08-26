@@ -31,7 +31,7 @@ namespace EssentialUIKit.Views.Catalog
         public ListVenuesPage()
         {
             InitializeComponent();
-            SetActivity(true);
+            SetActivity(true);            
             //this.BindingContext = CatalogDataService.Instance.CatalogPageViewModel;
         }
 

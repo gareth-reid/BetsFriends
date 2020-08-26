@@ -43,7 +43,7 @@ namespace EssentialUIKit.AppLayout.Views
         /// </summary>
         public HomePage()
         {
-            InitializeComponent();
+            InitializeComponent();            
         }
 
         #endregion

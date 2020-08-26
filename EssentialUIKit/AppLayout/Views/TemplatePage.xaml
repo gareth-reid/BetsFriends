@@ -63,12 +63,12 @@
                 VerticalOptions="CenterAndExpand" />
 
             <Button
-                Clicked="GotoCodeViewer"
+                Clicked="Login"
                 HorizontalOptions="End"
-                Text="&#xe753;"
                 FontSize="16"
-                Style="{StaticResource ActionBarSettingIconStyle}"
-                VerticalOptions="CenterAndExpand" />
+                Style="{StaticResource SfGradientButtonStyle}"
+                VerticalOptions="CenterAndExpand"
+                Text="{Binding DisplayName}"/>
 
             <Button
                 Clicked="ShowSettings"

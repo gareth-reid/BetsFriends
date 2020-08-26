@@ -11,9 +11,9 @@
              xmlns:template="clr-namespace:EssentialUIKit.Views.Templates"
              x:Class="EssentialUIKit.Views.Catalog.ListRunnersPage"
              BackgroundColor="{DynamicResource Gray-White}"
-             NavigationPage.HasNavigationBar="False"
+             NavigationPage.HasNavigationBar="True"
              x:Name="listRunnersPage"
-             Title="List Runners">
+             Title="Leg 1 - Sandown">
 
     <ContentPage.Resources>
         <ResourceDictionary>
@@ -38,35 +38,40 @@
            <ActivityIndicator HorizontalOptions="Center" VerticalOptions="Center" 
             IsRunning="{Binding Source={x:Reference runnerListView}}" 
             x:Name="activity"/>
-               <ListView
+               <ListView 
                 x:Name="runnerListView"
                 HasUnevenRows="True"
                 ItemsSource="{Binding Runners}"
                 RowHeight="85"
-                ItemSelected="ListView_OnSelectionChanged"
-                 
+                ItemSelected="ListView_OnSelectionChanged"                 
                 SeparatorVisibility="Default">                
                 <ListView.ItemTemplate>
 	                <DataTemplate > 
                         <ViewCell>
-                            <Grid Margin="8,8,8,8" RowSpacing="4">
+                            <Grid Margin="8,8,8,8" RowSpacing="4" BackgroundColor="{Binding SelectedColor}">
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="Auto" />
                                 <RowDefinition Height="Auto" />                                
                             </Grid.RowDefinitions>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="4*" />
-                                <ColumnDefinition Width="1*" />
-                                <ColumnDefinition Width="2*" />                                
+                                <ColumnDefinition Width="2*" />
+                                <ColumnDefinition Width="1*" />                                
                             </Grid.ColumnDefinitions>
                                 <Label Grid.Row="0" 
                                            Margin="8,8,8,8"
                                            Text="{Binding Name}"
-                                           TextColor="{DynamicResource Gray-900}"
+                                           TextColor="{DynamicResource Gray-900}"                                           
                                            FontSize="16"
                                            FontFamily="{DynamicResource Montserrat-SemiBold}"
                                            LineHeight="{OnPlatform Android=1.5, Default=-1}" />
-                                
+                                <Label Grid.Row="0"  Grid.Column="1"
+                                           Margin="8,8,8,8"
+                                           Text="{Binding SelectedText}"
+                                           TextColor="DarkMagenta"                                           
+                                           FontSize="12"
+                                           FontFamily="{DynamicResource Montserrat-SemiBold}"
+                                           LineHeight="{OnPlatform Android=1.5, Default=-1}" />
                                 <Label Grid.Row="0" Grid.Column="2"
                                            Margin="8,8,8,8"
                                            HorizontalTextAlignment="End"
@@ -74,11 +79,8 @@
                                            TextColor="{DynamicResource Gray-900}"
                                            FontSize="16"
                                            FontFamily="{DynamicResource Montserrat-SemiBold}"
-                                           LineHeight="{OnPlatform Android=1.5, Default=-1}" />
-                               
-                                        
+                                           LineHeight="{OnPlatform Android=1.5, Default=-1}" /> 
                                 <Label Grid.Row="1" Grid.ColumnSpan="3"
-
                                            Margin="8,8,8,8"
                                            Text="{Binding MetaDataDisplay}"
                                            TextColor="{DynamicResource Gray-700}"
@@ -86,7 +88,7 @@
                                            FontFamily="{DynamicResource Montserrat-Medium}"
                                            LineBreakMode="TailTruncation"
                                            MaxLines="2"
-                                           LineHeight="{OnPlatform Android=1.2, Default=-1}" />
+                                           LineHeight="{OnPlatform Android=1.2, Default=-1}" />                           
                                                            
                                 
                             </Grid>

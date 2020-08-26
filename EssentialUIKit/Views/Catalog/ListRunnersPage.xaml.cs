@@ -51,9 +51,16 @@ namespace EssentialUIKit.Views.Catalog
                     var runnerArray = r.Split('|');
                     var runner = new Runner(runnerArray[0].Trim(), runnerArray[1].Trim(), runnerArray[2].Trim(), runnerArray[3].Trim());
                     Runners.Add(runner);
-                }                
+                }
+
+                Runners[0].SelectedColor = "LightGray";
+                Runners[0].SelectedText = "Aaron";
+                Runners[3].SelectedColor = "LightGray";
+                Runners[3].SelectedText = "Casey, Cam";
+                Runners[6].SelectedColor = "LightGray";
+                Runners[6].SelectedText = "Gareth";
+                runnerListView.ItemsSource = Runners;               
                 
-                runnerListView.ItemsSource = Runners;
                 //BindingContext = this;
             }
             catch (Exception e)
@@ -109,15 +116,17 @@ namespace EssentialUIKit.Views.Catalog
 
         public String Id { get; set; }
         public String Price { get; set; }
-
+        public String SelectedColor { get; set; }
+        public String SelectedText { get; set; }
+        
         public String DisplayPrice
         {
             get
             {
-                return "$" + Price;
+                return "$" + (Price == "" || Price == null ? "11" : Price);
             }            
         }
-
+               
         public void BuildMetadata(string metaData)
         {
             MetaData = new RunnerMetaData();

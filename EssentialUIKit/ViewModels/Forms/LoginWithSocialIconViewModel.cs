@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Net.Http;
 using System.Threading.Tasks;
 using EssentialUIKit.AppLayout.Views;
 using EssentialUIKit.Views.Catalog;
@@ -28,8 +29,10 @@ namespace EssentialUIKit.ViewModels.Forms
     public class LoginWithSocialIconViewModel : LoginViewModel
     {
         #region Fields
-
+        private const string _betfairApi = "http://betsfriendsapi.azurewebsites.net/api/CheckUser?";//?mock=true";
+        private HttpClient _client = new HttpClient();
         private string password;
+        private string email;
         public INavigation Navigation { get; set; }
 
         #endregion
@@ -111,8 +114,31 @@ namespace EssentialUIKit.ViewModels.Forms
                 //Debug.WriteLine(ex.ToString());
             }
         }
-#endregion
+        #endregion
         #region property
+
+        
+        /// <summary>
+        /// Gets or sets the property that is bound with an entry that gets the password from user in the login page.
+        /// </summary>
+        public string Email
+        {
+            get
+            {
+                return this.email;
+            }
+
+            set
+            {
+                if (this.email == value)
+                {
+                    return;
+                }
+
+                this.email = value;
+                this.NotifyPropertyChanged();
+            }
+        }
 
         /// <summary>
         /// Gets or sets the property that is bound with an entry that gets the password from user in the login page.
@@ -180,7 +206,19 @@ namespace EssentialUIKit.ViewModels.Forms
         /// <param name="obj">The Object</param>
         private void LoginClicked(object obj)
         {
-            App.Current.MainPage = new NavigationPage(new HomePage());            
+            var api = _betfairApi + "un=" + email + "&pw=" + password;
+            string name = _client.GetStringAsync(api).Result.ToString();
+            if (name != "")
+            {
+                Application.Current.Properties.Add("name", name);
+                App.Current.MainPage = new NavigationPage(new HomePage());
+            }
+            else
+            {
+                App.Current.MainPage = new NavigationPage(new LoginWithSocialIconPage());
+
+            }
+
             //Navigation.PushAsync(new HomePage());            
             // Do something
         }
