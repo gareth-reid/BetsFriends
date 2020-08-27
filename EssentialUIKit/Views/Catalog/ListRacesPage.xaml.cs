@@ -101,7 +101,7 @@ namespace EssentialUIKit.Views.Catalog
                 assembly.GetType($"EssentialUIKit.{pageName}"));
             ///Navigation.PushAsync(new ListRacesPage(e.SelectedItem as Venue));
 
-            Navigation.PushAsync(new TemplateHostPage(template));            
+            Application.Current.MainPage.Navigation.PushAsync(new TemplateHostPage(template));
         }
     }
 

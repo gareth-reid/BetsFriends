@@ -46,8 +46,7 @@
                                       Text="{StaticResource Back}" />
 
                     <!--  Navigation travel page title  -->
-                    <Label FontFamily="{StaticResource Montserrat-Medium}"
-                           FontSize="16"
+                    <Label 
                            HorizontalOptions="Center"
                            Text="Travel"
                            TextColor="{DynamicResource Gray-900}"

@@ -88,9 +88,9 @@ namespace EssentialUIKit.Views.Catalog
             
             Routing.RegisterRoute("ListRaces",
                 assembly.GetType($"EssentialUIKit.{pageName}"));
-            ///Navigation.PushAsync(new ListRacesPage(e.SelectedItem as Venue));
-            
-            Navigation.PushAsync(new TemplateHostPage(template));
+            //Application.Current.MainPage.Navigation.PushAsync(new ListRacesPage(e.SelectedItem as Venue));
+
+            Application.Current.MainPage.Navigation.PushAsync(new TemplateHostPage(template));
 
             //Navigation.PushAsync<ListRacesPageViewModel, ListRacesPage>((viewModel, page) => viewModel.Venue = e.SelectedItem as Venue);
             //return _pushCommand ?? (_pushCommand = new RelayCommand(() => Navigation.PushAsync<ListRacesPageViewModel>((viewModel, page) => viewModel.Venue = e.SelectedItem as Venue)));

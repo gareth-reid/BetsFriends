@@ -27,6 +27,7 @@ namespace EssentialUIKit.ViewModels.Catalog
         #region Fields
         private Venue venue;
         private string displayName;
+        private Command backButtonCommand;
         #endregion
 
         #region Public properties                
@@ -64,6 +65,16 @@ namespace EssentialUIKit.ViewModels.Catalog
 
                 this.displayName = value;
             }
+        }
+
+        public Command BackButtonCommand
+        {
+            get { return this.backButtonCommand ?? (this.backButtonCommand = new Command(this.BackButtonClicked)); }
+        }
+
+        private void BackButtonClicked(object obj)
+        {
+            Application.Current.MainPage.Navigation.PopAsync();
         }
         #endregion
 

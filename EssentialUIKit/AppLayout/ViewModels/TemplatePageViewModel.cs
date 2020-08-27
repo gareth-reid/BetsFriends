@@ -14,7 +14,7 @@ namespace EssentialUIKit.AppLayout.ViewModels
     public class TemplatePageViewModel : INotifyPropertyChanged
     {
         public TemplatePageViewModel()
-        {            
+        {
             if (Application.Current.Properties.ContainsKey("name"))
             {
                 displayName = Application.Current.Properties["name"] as string;
@@ -22,9 +22,10 @@ namespace EssentialUIKit.AppLayout.ViewModels
             else
             {
                 displayName = "LOGIN";
-            }            
+            }
         }
-
+        #region Fields
+        private string displayName;
         public string DisplayName
         {
             get
@@ -42,13 +43,10 @@ namespace EssentialUIKit.AppLayout.ViewModels
                 this.displayName = value;
             }
         }
-        #region Fields
-
         /// <summary>
         /// Gets or sets the selected category.
         /// </summary>
         private Category selectedCategory;
-        private string displayName;
         #endregion
 
         #region event

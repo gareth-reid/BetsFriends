@@ -18,6 +18,7 @@ namespace EssentialUIKit.AppLayout.Views
         private double width;
         private double height;
         
+
         #endregion
 
         #region  Constructor
@@ -39,10 +40,8 @@ namespace EssentialUIKit.AppLayout.Views
         }
 
         #endregion
-
-        #region Methods
         
-
+        #region Methods               
         protected override void OnSizeAllocated(double width, double height)
         {
             base.OnSizeAllocated(width, height);
