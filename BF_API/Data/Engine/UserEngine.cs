@@ -50,6 +50,17 @@ namespace BF_API.Data.Engine
             }
         }
 
-        
+        public User GetUser(string username)
+        {
+            using (var db = new DataContext())
+            {
+                var user = db.Users
+                    .Where(u => u.Name == username)
+                   .FirstOrDefault();
+                return user;
+            }
+        }
+
+
     }
 }

@@ -89,12 +89,8 @@ namespace EssentialUIKit.Views.Catalog
             {
                 return;
             }
-            var assembly = typeof(App).GetTypeInfo().Assembly;
-            var pageName = "ListRunnersPage";
-            //var template = new Template("Races", "List Races", pageName, false, "", true);
-            Routing.RegisterRoute("ListRunners",
-                assembly.GetType($"EssentialUIKit.{pageName}"));
-            //Navigation.PushAsync(new ListRacesPage(e.SelectedItem as Venue));
+
+
         }
     }
 
