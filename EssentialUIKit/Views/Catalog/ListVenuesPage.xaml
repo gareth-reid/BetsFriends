@@ -24,7 +24,7 @@
     </ContentPage.Resources>
 
     <ContentPage.BindingContext>
-        <viewModel:EventListViewModel />
+        <viewModel:ListRacesPageViewModel />
     </ContentPage.BindingContext>
     <ContentPage.Content>
         <border:SfBorder
@@ -43,8 +43,7 @@
                 HasUnevenRows="True"
                 ItemsSource="{Binding Venues}"
                 RowHeight="85"
-                   ItemSelected="ListView_OnSelectionChanged"
-               
+                ItemSelected="ListView_OnSelectionChanged"               
                 SeparatorVisibility="Default">                
                 <ListView.ItemTemplate>
 	                <DataTemplate > 

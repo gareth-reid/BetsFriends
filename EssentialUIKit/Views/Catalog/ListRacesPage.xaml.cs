@@ -3,7 +3,12 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Net.Http;
+using System.Reflection;
+using EssentialUIKit.AppLayout.Models;
+using EssentialUIKit.AppLayout.Views;
 using EssentialUIKit.DataService;
+using EssentialUIKit.ViewModels;
+using EssentialUIKit.ViewModels.Catalog;
 using Newtonsoft.Json;
 using Xamarin.Forms;
 using Xamarin.Forms.Internals;
@@ -30,8 +35,15 @@ namespace EssentialUIKit.Views.Catalog
         {
             _venue = venue;
             InitializeComponent();
+            SetActivity(true);            
+        }
+
+        
+        public ListRacesPage()
+        {            
+            InitializeComponent();                        
             SetActivity(true);
-            //this.BindingContext = CatalogDataService.Instance.CatalogPageViewModel;
+            _venue = ((ListRacesPageViewModel)BindingContext).Venue;
         }
 
         protected override async void OnAppearing()
@@ -81,8 +93,15 @@ namespace EssentialUIKit.Views.Catalog
             {
                 return;
             }
+            var assembly = typeof(App).GetTypeInfo().Assembly;
+            var pageName = "Views.Catalog.ListRunnersPage";
+            var template = new Template("Runners", "List Runners", pageName, false, "", true, e.SelectedItem as Race);
 
-            Navigation.PushAsync(new ListRunnersPage(e.SelectedItem as Race));
+            Routing.RegisterRoute("ListRunners",
+                assembly.GetType($"EssentialUIKit.{pageName}"));
+            ///Navigation.PushAsync(new ListRacesPage(e.SelectedItem as Venue));
+
+            Navigation.PushAsync(new TemplateHostPage(template));            
         }
     }
 

@@ -11,7 +11,7 @@ namespace EssentialUIKit.AppLayout.Models
         {            
         }
 
-        public Template(string name, string description, string pageName, bool layoutFullScreen, string updateType, bool isUpdate)
+        public Template(string name, string description, string pageName, bool layoutFullScreen, string updateType, bool isUpdate, object viewParams = null)
         {
             this.Name = name;
             this.Description = description;
@@ -19,6 +19,7 @@ namespace EssentialUIKit.AppLayout.Models
             this.LayoutFullscreen = layoutFullScreen;
             this.UpdateType = updateType;
             this.IsUpdate = isUpdate;
+            this.ViewParams = viewParams;
         }
 
         #endregion
@@ -36,6 +37,7 @@ namespace EssentialUIKit.AppLayout.Models
         public string UpdateType { get; set; }
 
         public bool IsUpdate { get; set; }
+        public object ViewParams { get; set; }
 
         #endregion
     }

@@ -11,7 +11,7 @@
              xmlns:template="clr-namespace:EssentialUIKit.Views.Templates"
              x:Class="EssentialUIKit.Views.Catalog.ListRunnersPage"
              BackgroundColor="{DynamicResource Gray-White}"
-             NavigationPage.HasNavigationBar="True"
+             NavigationPage.HasNavigationBar="False"
              x:Name="listRunnersPage"
              Title="Leg 1 - Sandown">
 
@@ -24,7 +24,7 @@
     </ContentPage.Resources>
 
     <ContentPage.BindingContext>
-        <viewModel:EventListViewModel />
+        <viewModel:ListRacesPageViewModel />
     </ContentPage.BindingContext>
     <ContentPage.Content>
         <border:SfBorder

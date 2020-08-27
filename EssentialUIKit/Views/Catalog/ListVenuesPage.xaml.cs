@@ -10,6 +10,8 @@ using Xamarin.Forms;
 using Xamarin.Forms.Internals;
 using Xamarin.Forms.Xaml;
 using System.Reflection;
+using EssentialUIKit.AppLayout.Views;
+using EssentialUIKit.ViewModels.Catalog;
 
 namespace EssentialUIKit.Views.Catalog
 {
@@ -81,11 +83,18 @@ namespace EssentialUIKit.Views.Catalog
                 return;
             }
             var assembly = typeof(App).GetTypeInfo().Assembly;
-            var pageName = "ListRacesPage";
-            //var template = new Template("Races", "List Races", pageName, false, "", true);
+            var pageName = "Views.Catalog.ListRacesPage";
+            var template = new Template("Races", "List Races", pageName, false, "", true, e.SelectedItem as Venue);
+            
             Routing.RegisterRoute("ListRaces",
                 assembly.GetType($"EssentialUIKit.{pageName}"));
-            Navigation.PushAsync(new ListRacesPage(e.SelectedItem as Venue));
+            ///Navigation.PushAsync(new ListRacesPage(e.SelectedItem as Venue));
+            
+            Navigation.PushAsync(new TemplateHostPage(template));
+
+            //Navigation.PushAsync<ListRacesPageViewModel, ListRacesPage>((viewModel, page) => viewModel.Venue = e.SelectedItem as Venue);
+            //return _pushCommand ?? (_pushCommand = new RelayCommand(() => Navigation.PushAsync<ListRacesPageViewModel>((viewModel, page) => viewModel.Venue = e.SelectedItem as Venue)));
+
         }
     }
 

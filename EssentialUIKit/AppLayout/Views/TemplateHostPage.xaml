@@ -56,6 +56,13 @@
                    Style="{StaticResource ActionBarLabelStyle}"
                    HorizontalOptions="StartAndExpand"
                    VerticalOptions="CenterAndExpand" />
+            <Label                
+                HorizontalOptions="End"
+                FontSize="14"
+                Style="{StaticResource SfGradientButtonStyle}"
+                VerticalOptions="CenterAndExpand"
+                Text="{Binding DisplayName}"/>
+           
         </StackLayout>
 
         <border:SfBorder Grid.Row="2" Grid.RowSpan="2" 

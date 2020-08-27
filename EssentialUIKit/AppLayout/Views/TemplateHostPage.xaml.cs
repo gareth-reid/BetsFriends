@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Reflection;
 using EssentialUIKit.AppLayout.Models;
+using EssentialUIKit.ViewModels;
+using EssentialUIKit.ViewModels.Catalog;
 using Xamarin.Forms;
 using Xamarin.Forms.Internals;
 using Xamarin.Forms.Xaml;
@@ -15,7 +17,7 @@ namespace EssentialUIKit.AppLayout.Views
 
         private double width;
         private double height;
-
+        
         #endregion
 
         #region  Constructor
@@ -30,15 +32,16 @@ namespace EssentialUIKit.AppLayout.Views
             TemplateHostView.WidthRequest = HostViewContainer.WidthRequest = Application.Current.MainPage.Width;
 
             if (selectedTemplate != null)
-            {
+            {                
                 Title.Text = selectedTemplate.Name;
-                this.LoadPage(selectedTemplate.PageName);
-            }
+                this.LoadPage(selectedTemplate.PageName, selectedTemplate.ViewParams);
+            }            
         }
 
         #endregion
 
         #region Methods
+        
 
         protected override void OnSizeAllocated(double width, double height)
         {
@@ -70,12 +73,20 @@ namespace EssentialUIKit.AppLayout.Views
             }
         }
 
-        private void LoadPage(string pageURL)
+        private void LoadPage(string pageURL, object viewParams)
         {
             var assembly = typeof(App).GetTypeInfo().Assembly;
+            Page page;
 
-            var page = (Page)Activator.CreateInstance(assembly.GetType($"EssentialUIKit.{pageURL}"));
+            if (viewParams != null)
+            {                
+                page = (Page)Activator.CreateInstance(assembly.GetType($"EssentialUIKit.{pageURL}"), viewParams);
+            }
+            else {
 
+
+                page = (Page)Activator.CreateInstance(assembly.GetType($"EssentialUIKit.{pageURL}"));
+            }
             TemplateHostView.Template = new NavigationPage(page);
         }
 

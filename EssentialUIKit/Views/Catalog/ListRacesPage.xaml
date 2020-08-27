@@ -11,8 +11,8 @@
              xmlns:template="clr-namespace:EssentialUIKit.Views.Templates"
              x:Class="EssentialUIKit.Views.Catalog.ListRacesPage"
              BackgroundColor="{DynamicResource Gray-White}"
-             NavigationPage.HasNavigationBar="True"
-             x:Name="listRacesPagee"
+             NavigationPage.HasNavigationBar="False"
+             x:Name="listRacesPage"
              Title="List Races">
 
     <ContentPage.Resources>
@@ -23,9 +23,10 @@
         </ResourceDictionary>
     </ContentPage.Resources>
 
-    <ContentPage.BindingContext>
-        <viewModel:EventListViewModel />
+     <ContentPage.BindingContext>
+        <viewModel:ListRacesPageViewModel />
     </ContentPage.BindingContext>
+
     <ContentPage.Content>
         <border:SfBorder
             Grid.Row="2"
