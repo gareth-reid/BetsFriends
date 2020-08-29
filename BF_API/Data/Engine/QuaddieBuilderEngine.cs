@@ -70,6 +70,45 @@ namespace BF_API.Data.Engine
             return quaddieGroup;
         }
 
+        public QuaddieGroup Create(string description, string quaddieGroupId, string venueApiId, string user)
+        {
+            try
+            {
+                var quaddieGroup = GetFromApiId(quaddieGroupId);
+                var venueEngine = new VenueEngine();
+                var venue = venueEngine.GetFromApiId(venueApiId);
+
+                using (var db = new DataContext())
+                {
+                    quaddieGroup.Description = description;
+                    quaddieGroup.Venue = venue;
+                    db.Entry(quaddieGroup.Venue).State = EntityState.Unchanged;
+                    if (quaddieGroup.QuaddieGroupId == 0)
+                    {
+                        db.Entry(quaddieGroup).State = EntityState.Added;
+                    } else
+                    {
+                        db.Entry(quaddieGroup).State = EntityState.Modified;
+                    }
+                    db.SaveChanges();
+                }
+
+                return quaddieGroup;
+            } catch (Exception e)
+            {
+                var ex = e;
+                return null;
+            }
+        }
+
+        //TODO: refactor to a toolbox
+        public int GetInt(string value)
+        {
+            int valueAsInt;
+            int.TryParse(value, out valueAsInt);
+            return valueAsInt;
+
+        }
         public List<QuaddieGroup> GetAll()
         {  
                 using (var db = new DataContext())

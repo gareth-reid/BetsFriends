@@ -14,33 +14,25 @@ using System.Linq;
 using System.Security.Cryptography.X509Certificates;
 using BF_API.CacheManager;
 using BF_API.Data.Engine;
-using BF_API.Data;
 
 namespace BF_API
 {
-    public static class GetQuaddieGroup
+    public static class QuaddieBuilder
     {
-        [FunctionName("GetQuaddieGroup")]
+        [FunctionName("QuaddieBuilder")]
         public static IActionResult Run(
             [HttpTrigger(AuthorizationLevel.Anonymous, "get", "post", Route = null)] HttpRequest req,
             ILogger log, ExecutionContext context)
-        {            
+        {
             log.LogInformation("QuaddieBuilder API accessed, Date:" + new DateTime().ToString());
-                        
-            int quaddieGroupId;
-            int.TryParse(req.Query["qgId"].ToString(), out quaddieGroupId);
-            List<QuaddieGroup> quaddieGroups = new List<QuaddieGroup>();
 
+            string quaddieGroupId = req.Query["qgId"].ToString();
+            string runnerId = req.Query["runnerId"].ToString();
+            string user = req.Query["user"].ToString();
+            string description = req.Query["description"].ToString();
             QuaddieBuilderEngine quaddieBuilderEngine = new QuaddieBuilderEngine();
-            if (quaddieGroupId == 0)
-            {
-                quaddieGroups = quaddieBuilderEngine.GetAll();
-            }
-            else
-            {
-                quaddieGroups.Add(quaddieBuilderEngine.GetFromApiId(quaddieGroupId));
-            }
-            return new OkObjectResult(quaddieGroups);
-        }        
+            var success = quaddieBuilderEngine.Execute(runnerId, quaddieGroupId, user);
+            return new OkObjectResult(success);
+        }
     }
 }
