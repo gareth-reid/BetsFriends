@@ -32,6 +32,7 @@ namespace BF_API
             {
                 using (var db = new DataContext())
                 {
+                    //db.Database.EnsureDeleted();
                     db.Database.EnsureCreated();
                 }
                 //BFHorseVenues.Run(req, log, context);

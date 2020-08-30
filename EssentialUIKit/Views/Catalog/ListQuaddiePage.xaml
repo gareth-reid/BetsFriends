@@ -1,0 +1,141 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:buttons="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Buttons.XForms"
+             xmlns:border="clr-namespace:Syncfusion.XForms.Border;assembly=Syncfusion.Core.XForms"
+             xmlns:controls="clr-namespace:EssentialUIKit.AppLayout.Controls;assembly=EssentialUIKit"
+             xmlns:tabView="clr-namespace:Syncfusion.XForms.TabView;assembly=Syncfusion.SfTabView.XForms"
+             xmlns:viewModel="clr-namespace:EssentialUIKit.ViewModels.Catalog"
+             xmlns:listView="clr-namespace:Syncfusion.ListView.XForms;assembly=Syncfusion.SfListView.XForms"
+             xmlns:core="clr-namespace:Syncfusion.XForms.Core;assembly=Syncfusion.Core.XForms"
+             xmlns:template="clr-namespace:EssentialUIKit.Views.Templates"
+             x:Class="EssentialUIKit.Views.Catalog.ListQuaddiePage"
+             BackgroundColor="{DynamicResource Gray-White}"
+             NavigationPage.HasNavigationBar="False"
+             x:Name="createQuaddiePage"
+             Title="Create Quaddie">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Styles.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <ContentPage.BindingContext>
+        <viewModel:ListRacesPageViewModel />
+    </ContentPage.BindingContext>
+    <ContentPage.Content>
+        <StackLayout Spacing="0">
+
+                <Grid HeightRequest="64">
+                    <Grid.ColumnDefinitions>                                
+                        <ColumnDefinition Width="1*" />
+                        <ColumnDefinition Width="4*" />
+                        <ColumnDefinition Width="2*" />                                                                
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>                                
+                        <RowDefinition Height="1*" />
+                        <RowDefinition Height="1*" />                        
+                    </Grid.RowDefinitions>
+                    <!--  Back button command  -->
+                    <buttons:SfButton Margin="16,0,0,0" 
+                                      HorizontalOptions="Start"
+                                      VerticalOptions="Center"
+                                      Command="{Binding BackButtonCommand}"
+                                      CornerRadius="4"
+                                      Grid.Column="0"
+                                      Grid.RowSpan="2"
+                                      Style="{StaticResource IconButtonStyle}"
+                                      Text="{StaticResource Back}" />
+
+                    <!--  Navigation page title  -->
+                    <Label FontFamily="{StaticResource Montserrat-Medium}"
+                           FontSize="16"
+                           FontAttributes="Bold"
+                           HorizontalOptions="Center"
+                           Text="Quaddies"
+                           Grid.Column="1"
+                           Grid.RowSpan="2"
+                           TextColor="{DynamicResource Gray-900}"
+                           VerticalOptions="Center" />
+                    <Frame
+                        Margin="0"
+                        Padding="0"
+                        BackgroundColor="#04B875"
+                        CornerRadius="10"
+                        HasShadow="False"
+                        Grid.Column="2"
+                        Grid.Row="0">
+
+                        <Frame.Content>
+                            <Label
+                                HorizontalOptions="CenterAndExpand"
+                                HorizontalTextAlignment="Center"
+                                VerticalTextAlignment="Center"
+                                Margin="0,0,0,0"
+                                FontFamily="{StaticResource Montserrat-Medium}"
+                                FontSize="12"
+                                Text="{Binding DisplayName}"
+                                TextColor="{DynamicResource Gray-White}" />
+                        </Frame.Content>
+                </Frame>
+                </Grid>
+        <border:SfBorder
+            Grid.Row="2"
+            Grid.RowSpan="2"
+            Padding="0,10,0,0"
+            BackgroundColor="{DynamicResource Gray-White}"
+            BorderWidth="0"
+            CornerRadius="10,10,0,0">
+            <StackLayout>
+           <ActivityIndicator HorizontalOptions="Center" VerticalOptions="Center" 
+            IsRunning="{Binding Source={x:Reference quaddieGroupListView}}" 
+            x:Name="activity"/>
+               <ListView
+                x:Name="quaddieGroupListView"
+                HasUnevenRows="True"
+                ItemsSource="{Binding QuaddieGroups}"
+                RowHeight="85"
+                ItemSelected="ListView_OnSelectionChanged"               
+                SeparatorVisibility="Default">                
+                <ListView.ItemTemplate>
+	                <DataTemplate > 
+                        <ViewCell>
+                            <Grid Margin="8,8,8,8" RowSpacing="4">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />                                
+                            </Grid.RowDefinitions>
+                                <Label Grid.Row="0" 
+                                           Margin="8,8,8,8"
+                                           Text="{Binding Description}"
+                                           TextColor="{DynamicResource Gray-900}"
+                                           FontSize="16"
+                                           FontFamily="{DynamicResource Montserrat-SemiBold}"
+                                           LineHeight="{OnPlatform Android=1.5, Default=-1}" />
+
+                                        <!--Details of travel place-->
+                                        <Label Grid.Row="1" 
+                                           Margin="8,8,8,8"
+                                           Text="{Binding Venue.Description}"
+                                           TextColor="{DynamicResource Gray-700}"
+                                           FontSize="12"
+                                           FontFamily="{DynamicResource Montserrat-Medium}"
+                                           LineBreakMode="TailTruncation"
+                                           MaxLines="2"
+                                           LineHeight="{OnPlatform Android=1.2, Default=-1}" />
+                                                           
+                                
+                            </Grid>
+                        </ViewCell>
+		            </DataTemplate>
+                </ListView.ItemTemplate>
+           </ListView>
+         </StackLayout>
+        </border:SfBorder>
+            </StackLayout>
+        </ContentPage.Content>
+   
+    </ContentPage>

@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Net.Http;
 using EssentialUIKit.AppLayout.Views;
+using EssentialUIKit.DataService;
 using EssentialUIKit.Views.Forms;
 using Newtonsoft.Json;
 using Xamarin.Forms;
@@ -16,7 +17,7 @@ namespace EssentialUIKit.ViewModels.Forms
     public class SignUpPageViewModel : LoginViewModel
     {
         #region Fields
-        private const string _betfairApi = "http://betsfriendsapi.azurewebsites.net/api/AddUser?";//?mock=true";
+        
         private HttpClient _client = new HttpClient();
         private string name;
         private string email;
@@ -170,7 +171,7 @@ namespace EssentialUIKit.ViewModels.Forms
             }
             else
             {                
-                var api = _betfairApi + "un=" + name + "&pw=" + password + "&em=" + email;
+                var api = ApiDataService.AddUserApi + "un=" + name + "&pw=" + password + "&em=" + email;
                 _client.GetStringAsync(api);
                 Application.Current.Properties.Add("name", name);
                 App.Current.MainPage = new NavigationPage(new HomePage());

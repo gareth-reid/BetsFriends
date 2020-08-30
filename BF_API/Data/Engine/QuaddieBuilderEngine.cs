@@ -58,6 +58,7 @@ namespace BF_API.Data.Engine
                 {                    
                     var quaddieGroups = db.Groups
                         .Include("Selections")
+                        .Include("Venue")
                         .Where(qg => qg.QuaddieGroupId == quaddieGroupId).ToList();
 
                     if (quaddieGroups != null && quaddieGroups.Count > 0)
@@ -77,19 +78,24 @@ namespace BF_API.Data.Engine
                 var quaddieGroup = GetFromApiId(quaddieGroupId);
                 var venueEngine = new VenueEngine();
                 var venue = venueEngine.GetFromApiId(venueApiId);
+                var userEngine = new UserEngine();
+                var activeUser = userEngine.GetUser(user);
 
                 using (var db = new DataContext())
                 {
                     quaddieGroup.Description = description;
                     quaddieGroup.Venue = venue;
                     db.Entry(quaddieGroup.Venue).State = EntityState.Unchanged;
+                                        
                     if (quaddieGroup.QuaddieGroupId == 0)
-                    {
-                        db.Entry(quaddieGroup).State = EntityState.Added;
+                    {                        
+                        db.Entry(quaddieGroup).State = EntityState.Added;                        
                     } else
                     {
                         db.Entry(quaddieGroup).State = EntityState.Modified;
                     }
+                    quaddieGroup.AdminUser = activeUser;
+                    db.Entry(quaddieGroup.AdminUser).State = EntityState.Unchanged;
                     db.SaveChanges();
                 }
 
@@ -115,6 +121,7 @@ namespace BF_API.Data.Engine
                 {                    
                     return db.Groups
                     .Include("Selections")
+                    .Include("Venue")
                     .ToList();                    
                 }
         }

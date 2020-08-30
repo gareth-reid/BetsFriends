@@ -12,6 +12,7 @@ using Xamarin.Forms.Xaml;
 using System.Reflection;
 using EssentialUIKit.AppLayout.Views;
 using EssentialUIKit.ViewModels.Catalog;
+using Acr.UserDialogs;
 
 namespace EssentialUIKit.Views.Catalog
 {
@@ -22,7 +23,7 @@ namespace EssentialUIKit.Views.Catalog
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class ListVenuesPage
     {
-        private const string _betfairApi = "http://betsfriendsapi.azurewebsites.net/api/BFHorseVenues?";//?mock=true";
+       
         private HttpClient _client = new HttpClient();
 
         public ObservableCollection<Venue> Venues { get; } = new ObservableCollection<Venue>();
@@ -33,7 +34,8 @@ namespace EssentialUIKit.Views.Catalog
         public ListVenuesPage()
         {
             InitializeComponent();
-            SetActivity(true);            
+            SetActivity(true);
+            
             //this.BindingContext = CatalogDataService.Instance.CatalogPageViewModel;
         }
 
@@ -43,7 +45,7 @@ namespace EssentialUIKit.Views.Catalog
             try
             {
                 SetActivity(true);
-                var content = await _client.GetStringAsync(_betfairApi);
+                var content = await _client.GetStringAsync(ApiDataService.HorseVenuesApi);
                 var venues = JsonConvert.DeserializeObject<List<string>>(content);
                 
                 foreach ( string v in venues)
@@ -76,22 +78,38 @@ namespace EssentialUIKit.Views.Catalog
             //OnPropertyChanged();
         }
 
-        private void ListView_OnSelectionChanged(object sender, SelectedItemChangedEventArgs e)
+        private async void ListView_OnSelectionChanged(object sender, SelectedItemChangedEventArgs e)
         {
             if (e.SelectedItem == null)
             {
                 return;
             }
             var assembly = typeof(App).GetTypeInfo().Assembly;
-            var pageName = "Views.Catalog.ListRacesPage";
-            var template = new Template("Races", "List Races", pageName, false, "", true, e.SelectedItem as Venue);
+            var pageName = "Views.Catalog.ListRacesPage";            
             
             Routing.RegisterRoute("ListRaces",
                 assembly.GetType($"EssentialUIKit.{pageName}"));
-            //Application.Current.MainPage.Navigation.PushAsync(new ListRacesPage(e.SelectedItem as Venue));
 
-            Application.Current.MainPage.Navigation.PushAsync(new TemplateHostPage(template));
+            PromptResult pResult = await UserDialogs.Instance.PromptAsync(new PromptConfig
+            {
+                InputType = InputType.Name,
+                OkText = "Create",
+                Title = "Give Quaddie a Name",
+            });
+            if (pResult.Ok && !string.IsNullOrWhiteSpace(pResult.Text))
+            {
+                if (Application.Current.Properties.ContainsKey("name"))
+                {
+                    var user = Application.Current.Properties["name"] as string;
+                    var venue = e.SelectedItem as Venue;
+                    var template = new Template("Races", "List Races", pageName, false, "", true, venue);
+                    Application.Current.Properties["quaddieGroupId"] = await _client.GetStringAsync(ApiDataService.CreateQuaddieGroupApi + "desc=" + pResult.Text + "&user=" + user + "&vId=" + venue.Id);
+                    await Application.Current.MainPage.Navigation.PushAsync(new TemplateHostPage(template));
+                }
+            }
 
+            
+            
             //Navigation.PushAsync<ListRacesPageViewModel, ListRacesPage>((viewModel, page) => viewModel.Venue = e.SelectedItem as Venue);
             //return _pushCommand ?? (_pushCommand = new RelayCommand(() => Navigation.PushAsync<ListRacesPageViewModel>((viewModel, page) => viewModel.Venue = e.SelectedItem as Venue)));
 

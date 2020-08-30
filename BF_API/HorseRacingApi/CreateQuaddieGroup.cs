@@ -31,8 +31,8 @@ namespace BF_API
             string description = req.Query["desc"].ToString();
             string venueApiId = req.Query["vId"].ToString();
             QuaddieBuilderEngine quaddieBuilderEngine = new QuaddieBuilderEngine();
-            var success = quaddieBuilderEngine.Create(description, quaddieGroupId, venueApiId, user);
-            return new OkObjectResult(success);
+            var quaddieGroup = quaddieBuilderEngine.Create(description, quaddieGroupId, venueApiId, user);
+            return new OkObjectResult(quaddieGroup.QuaddieGroupId);
         }        
     }
 }

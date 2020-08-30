@@ -2,6 +2,7 @@
 using System.Net.Http;
 using System.Threading.Tasks;
 using EssentialUIKit.AppLayout.Views;
+using EssentialUIKit.DataService;
 using EssentialUIKit.Views.Catalog;
 using EssentialUIKit.Views.Forms;
 using Newtonsoft.Json;
@@ -29,7 +30,7 @@ namespace EssentialUIKit.ViewModels.Forms
     public class LoginWithSocialIconViewModel : LoginViewModel
     {
         #region Fields
-        private const string _betfairApi = "http://betsfriendsapi.azurewebsites.net/api/CheckUser?";//?mock=true";
+        
         private HttpClient _client = new HttpClient();
         private string password;
         private string email;
@@ -206,7 +207,7 @@ namespace EssentialUIKit.ViewModels.Forms
         /// <param name="obj">The Object</param>
         private void LoginClicked(object obj)
         {
-            var api = _betfairApi + "un=" + email + "&pw=" + password;
+            var api = ApiDataService.CheckUserApi + "un=" + email + "&pw=" + password;
             string name = _client.GetStringAsync(api).Result.ToString();
             if (name != "")
             {

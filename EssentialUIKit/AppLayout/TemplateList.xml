@@ -1,9 +1,9 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <Samples>
   <Home Icon="social.png" Name="Collaboration" IsUpdated="True" Description="Build something with friends">
-    <HomePages Name="Build a Multi" Description="" PageName="Views.Catalog.Multi"/>
-    <HomePages Name="Build a Quaddie" Description=" " PageName="Views.Catalog.ListVenuesPage"/> 
-        <HomePages Name="Navigation Travel Page" IsNew="True" Description="This page shows a card view of travel destinations, plus top locations and the best places." PageName="Views.Catalog.NavigationTravelPage"/>
+    <HomePages Name="Contribute to a Quaddies" Description=" " PageName="Views.Catalog.ListQuaddiePage"/> 
+    <HomePages Name="Create a new Quaddie" Description=" " PageName="Views.Catalog.ListVenuesPage"/> 
+    <HomePages Name="Navigation Travel Page" IsNew="True" Description="This page shows a card view of travel destinations, plus top locations and the best places." PageName="Views.Catalog.NavigationTravelPage"/>
   </Home>  
   <Home Icon="feedback.png" Name="Find a Multi" IsUpdated="True" Description="Build something with friends">
     <HomePages Name="AFL" Description="" PageName="Views.Catalog.CatalogListPage"/>

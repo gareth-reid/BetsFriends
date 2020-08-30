@@ -21,7 +21,7 @@ namespace EssentialUIKit.Views.Catalog
     public partial class ListRunnersPage
     {
         //192.168.1.6
-        private const string _betfairApi = "http://betsfriendsapi.azurewebsites.net/api/BFHorseRunners?";//?mock=true";
+        
         private HttpClient _client = new HttpClient();
         private Race _race;
         public ObservableCollection<Runner> Runners { get; } = new ObservableCollection<Runner>();
@@ -43,7 +43,7 @@ namespace EssentialUIKit.Views.Catalog
             try
             {
                 SetActivity(true);
-                var content = await _client.GetStringAsync(_betfairApi + "id=" + _race.Id);
+                var content = await _client.GetStringAsync(ApiDataService.HorseRunnerApi + "id=" + _race.Id);
                 var runners = JsonConvert.DeserializeObject<List<string>>(content);
                 
                 foreach ( string r in runners)
@@ -83,14 +83,20 @@ namespace EssentialUIKit.Views.Catalog
             //OnPropertyChanged();
         }
 
-        private void ListView_OnSelectionChanged(object sender, SelectedItemChangedEventArgs e)
+        private async void ListView_OnSelectionChanged(object sender, SelectedItemChangedEventArgs e)
         {
             if (e.SelectedItem == null)
             {
                 return;
             }
+            var runner = e.SelectedItem as Runner;
+            var quaddieGroupId = Application.Current.Properties["quaddieGroupId"] as string;
+            var user = Application.Current.Properties["user"] as string;
 
-
+            var content = await _client.GetStringAsync(ApiDataService.QuaddieBuilderApi + "qgId=" + quaddieGroupId + "&selectionId=" + runner.Id + "&user=" + user);
+            var runners = JsonConvert.DeserializeObject<List<string>>(content);
+            
+            int i = 0;
         }
     }
 

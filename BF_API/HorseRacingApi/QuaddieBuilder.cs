@@ -27,11 +27,10 @@ namespace BF_API
             log.LogInformation("QuaddieBuilder API accessed, Date:" + new DateTime().ToString());
 
             string quaddieGroupId = req.Query["qgId"].ToString();
-            string runnerId = req.Query["runnerId"].ToString();
+            string selectionId = req.Query["selectionId"].ToString();
             string user = req.Query["user"].ToString();
-            string description = req.Query["description"].ToString();
             QuaddieBuilderEngine quaddieBuilderEngine = new QuaddieBuilderEngine();
-            var success = quaddieBuilderEngine.Execute(runnerId, quaddieGroupId, user);
+            var success = quaddieBuilderEngine.Execute(selectionId, quaddieGroupId, user);
             return new OkObjectResult(success);
         }
     }

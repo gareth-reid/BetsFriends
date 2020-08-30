@@ -45,6 +45,7 @@
     <PackageReference Include="System.Net.Http" Version="4.3.4" />
     <PackageReference Include="Plugin.GoogleClient" Version="2.1.12" />
     <PackageReference Include="Google.Apis.Auth" Version="1.49.0" />
+    <PackageReference Include="Acr.UserDialogs" Version="7.1.0.450" />
   </ItemGroup>
   <ItemGroup>
     <None Remove="AppLayout\Icons\bookmark.png" />
@@ -139,7 +140,6 @@
   
   <ItemGroup>
     <Compile Remove="Views\Catalog\ListRacesPage %28copy%29.xaml.cs" />
-    <Compile Remove="Views\Catalog\ListVenuesPage %28copy%29.xaml.cs" />
   </ItemGroup>
   <ItemGroup>
     <Compile Update="Views\Catalog\ListVenuesPage.xaml.cs">
@@ -199,6 +199,15 @@
     </Compile>
     <Compile Update="Views\ContactUs\Styles.xaml.cs">
       <DependentUpon>%(Filename)</DependentUpon>
+    </Compile>
+    <Compile Condition=" '$(EnableDefaultCompileItems)' == 'true' " Update="Views\Catalog\ListVenuesPage %28copy%29.xaml.cs">
+      <DependentUpon>ListVenuesPage %28copy%29.xaml</DependentUpon>
+    </Compile>
+    <Compile Condition=" '$(EnableDefaultCompileItems)' == 'true' " Update="Views\Catalog\CreateQuaddie.xaml.cs">
+      <DependentUpon>CreateQuaddie.xaml</DependentUpon>
+    </Compile>
+    <Compile Condition=" '$(EnableDefaultCompileItems)' == 'true' " Update="Views\Catalog\CreateQuaddiePage.xaml.cs">
+      <DependentUpon>CreateQuaddiePage.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
 
@@ -312,6 +321,7 @@
 
   <ItemGroup>
     <Folder Include="Views\Collaboration\" />
+    <Folder Include="Models\Api\" />
   </ItemGroup>
   <Import Project="..\..\build\tools\Syncfusion.CodeAnalysis.FxCop\tools\FxCop.MsBuild.targets" Condition="Exists('..\..\build\tools\Syncfusion.CodeAnalysis.FxCop\tools\FxCop.MsBuild.targets')" />
   <Import Project="..\build\tools\Syncfusion.CodeAnalysis.StyleCop\tools\StyleCop.MsBuild.targets" Condition="Exists('..\build\tools\Syncfusion.CodeAnalysis.StyleCop\tools\StyleCop.MsBuild.targets')" />
