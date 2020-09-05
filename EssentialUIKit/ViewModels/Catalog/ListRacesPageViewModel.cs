@@ -1,6 +1,7 @@
 ﻿using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
 using EssentialUIKit.Models;
+using EssentialUIKit.Models.Api;
 using EssentialUIKit.Views.Catalog;
 using Xamarin.Forms;
 using Xamarin.Forms.Internals;

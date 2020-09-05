@@ -54,12 +54,12 @@
                     <Label FontFamily="{StaticResource Montserrat-Medium}"
                            FontSize="16"
                            FontAttributes="Bold"
-                           HorizontalOptions="Center"
-                           Text="Races"
+                           HorizontalOptions="Center"                           
                            Grid.Column="1"
                            Grid.RowSpan="2"
                            TextColor="{DynamicResource Gray-900}"
-                           VerticalOptions="Center" />
+                           VerticalOptions="Center"
+                           x:Name="PageNameLabel"/>
                     <Frame
                         Margin="0"
                         Padding="0"
@@ -99,11 +99,12 @@
                 ItemsSource="{Binding Races}"
                 RowHeight="85"
                 ItemSelected="ListView_OnSelectionChanged"
+                ItemTapped="ListView_ItemTapped"
                 SeparatorVisibility="Default">                
                 <ListView.ItemTemplate>
 	                <DataTemplate > 
                         <ViewCell>
-                            <Grid Margin="8,8,8,8" RowSpacing="4">
+                            <Grid Margin="8,8,8,8" RowSpacing="4"  BackgroundColor="{Binding SelectedColor}">
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="Auto" />
                                 <RowDefinition Height="Auto" />                                

@@ -13,8 +13,8 @@ namespace BF_API.Data.Engine
         private UserEngine _userEngine = new UserEngine();
         public bool Execute(string selectionId, string quaddieGroupId, string user)
         {
-            //try
-            //{
+            try
+            {
                 using (var db = new DataContext())
                 {
                     var runner = _runnerEngine.GetFromApiId(selectionId);
@@ -41,10 +41,10 @@ namespace BF_API.Data.Engine
                     }
                 }
                 return true;
-            /*} catch (Exception e)
+            } catch (Exception e)
             {
                 return false;
-            }*/
+            }
         }
 
         public QuaddieGroup GetFromApiId(object apiId)
@@ -58,7 +58,9 @@ namespace BF_API.Data.Engine
                 {                    
                     var quaddieGroups = db.Groups
                         .Include("Selections")
+                        .Include("Selections.Runner")
                         .Include("Venue")
+                        .Include("Selections.User")
                         .Where(qg => qg.QuaddieGroupId == quaddieGroupId).ToList();
 
                     if (quaddieGroups != null && quaddieGroups.Count > 0)
@@ -121,7 +123,9 @@ namespace BF_API.Data.Engine
                 {                    
                     return db.Groups
                     .Include("Selections")
+                    .Include("Selections.Runner")                    
                     .Include("Venue")
+                    .Include("Selections.User")
                     .ToList();                    
                 }
         }

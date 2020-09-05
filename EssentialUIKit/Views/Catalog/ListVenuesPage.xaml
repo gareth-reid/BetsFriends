@@ -98,7 +98,8 @@
                 HasUnevenRows="True"
                 ItemsSource="{Binding Venues}"
                 RowHeight="85"
-                ItemSelected="ListView_OnSelectionChanged"               
+                ItemSelected="ListView_OnSelectionChanged"
+                ItemTapped="ListView_ItemTapped"
                 SeparatorVisibility="Default">                
                 <ListView.ItemTemplate>
 	                <DataTemplate > 

@@ -7,6 +7,7 @@ using System.Reflection;
 using EssentialUIKit.AppLayout.Models;
 using EssentialUIKit.AppLayout.Views;
 using EssentialUIKit.DataService;
+using EssentialUIKit.Models.Api;
 using EssentialUIKit.ViewModels;
 using EssentialUIKit.ViewModels.Catalog;
 using Newtonsoft.Json;
@@ -23,7 +24,7 @@ namespace EssentialUIKit.Views.Catalog
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class ListRacesPage
     {
-        private const string _betfairApi = "http://betsfriendsapi.azurewebsites.net/api/BFRaces?";
+        
         private HttpClient _client = new HttpClient();
         private Venue _venue;
         public ObservableCollection<Race> Races { get; } = new ObservableCollection<Race>();
@@ -35,6 +36,8 @@ namespace EssentialUIKit.Views.Catalog
         {
             _venue = venue;
             InitializeComponent();
+            PageNameLabel.Text = venue.Description;
+
             SetActivity(true);            
         }
 
@@ -52,7 +55,7 @@ namespace EssentialUIKit.Views.Catalog
             try
             {
                 SetActivity(true);
-                var content = await _client.GetStringAsync(_betfairApi + "id=" + _venue.Id);
+                var content = await _client.GetStringAsync(ApiDataService.HorseRaces + "id=" + _venue.BfEventId);
                 var races = JsonConvert.DeserializeObject<List<Tuple< DateTime, String>>>(content);
                 
                 foreach (Tuple<DateTime, String> r in races)
@@ -62,8 +65,16 @@ namespace EssentialUIKit.Views.Catalog
                     var race = new Race(raceArray[0].Trim(),
                         racetTime, raceArray[2].Trim());
                     Races.Add(race);
-                }                
-                
+                }
+
+                Races[races.Count() - 1].SelectedColor = "LightGray";
+                Races[races.Count() - 1].SelectedText = "Leg 1";
+                Races[races.Count() - 2].SelectedColor = "LightGray";
+                Races[races.Count() - 1].SelectedText = "Leg 2";
+                Races[races.Count() - 3].SelectedColor = "LightGray";
+                Races[races.Count() - 1].SelectedText = "Leg 3";
+                Races[races.Count() - 4].SelectedColor = "LightGray";
+                Races[races.Count() - 1].SelectedText = "Leg 4";
                 raceListView.ItemsSource = Races;
                 //BindingContext = this;
             }
@@ -87,15 +98,19 @@ namespace EssentialUIKit.Views.Catalog
             //OnPropertyChanged();
         }
 
-        private void ListView_OnSelectionChanged(object sender, SelectedItemChangedEventArgs e)
+        private async void ListView_OnSelectionChanged(object sender, SelectedItemChangedEventArgs e)
         {
-            if (e.SelectedItem == null)
+        }
+
+        private async void ListView_ItemTapped(object sender, ItemTappedEventArgs e)
+        {
+            if (e.Item == null)
             {
                 return;
             }
             var assembly = typeof(App).GetTypeInfo().Assembly;
             var pageName = "Views.Catalog.ListRunnersPage";
-            var template = new Template("Runners", "List Runners", pageName, false, "", true, e.SelectedItem as Race);
+            var template = new Template("Runners", "List Runners", pageName, false, "", true, e.Item as Race);
 
             Routing.RegisterRoute("ListRunners",
                 assembly.GetType($"EssentialUIKit.{pageName}"));
@@ -116,5 +131,8 @@ namespace EssentialUIKit.Views.Catalog
         public String Name { get; set; }
         public String Time { get; set; }
         public String Id { get; set; }
+        public String SelectedColor { get; set; }
+        public String SelectedText { get; set; }
+
     }
 }

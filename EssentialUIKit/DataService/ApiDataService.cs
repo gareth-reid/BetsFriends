@@ -11,6 +11,7 @@ namespace EssentialUIKit.DataService
         public const string GetQuaddieGroupsApi = "http://localhost:7071/api/GetQuaddieGroup?";//?mock=true";
         public const string HorseRunnerApi = "http://localhost:7071/api/BFHorseRunners?";//?mock=true";
         public const string QuaddieBuilderApi = "http://localhost:7071/api/QuaddieBuilder?";//?mock=true";
+        public const string HorseRaces = "http://localhost:7071/api/BFRaces?";
 
 
 #else
@@ -21,6 +22,7 @@ namespace EssentialUIKit.DataService
         public const string GetQuaddieGroupsApi = "http://betsfriendsapi.azurewebsites.net/api/GetQuaddieGroup?";//?mock=true";
         public const string HorseRunnerApi = "http://betsfriendsapi.azurewebsites.net/api/BFHorseRunners?";//?mock=true";
         public const string QuaddieBuilderApi = "http://betsfriendsapi.azurewebsites.net/api/QuaddieBuilder?";//?mock=true";
+        public const string HorseRaces = "http://betsfriendsapi.azurewebsites.net/api/BFRaces?";
 
 
 #endif

@@ -10,6 +10,8 @@ using Xamarin.Forms;
 using Xamarin.Forms.Internals;
 using Xamarin.Forms.Xaml;
 using System.Reflection;
+using Acr.UserDialogs;
+using EssentialUIKit.Models.Api;
 
 namespace EssentialUIKit.Views.Catalog
 {
@@ -25,7 +27,6 @@ namespace EssentialUIKit.Views.Catalog
         private HttpClient _client = new HttpClient();
         private Race _race;
         public ObservableCollection<Runner> Runners { get; } = new ObservableCollection<Runner>();
-
         /// <summary>
         /// Initializes a new instance of the <see cref="ListVenuesPage" /> class.
         /// </summary>
@@ -33,6 +34,7 @@ namespace EssentialUIKit.Views.Catalog
         {
             _race = race;
             InitializeComponent();
+            PageNameLabel.Text = race.Name;
             SetActivity(true);
             //this.BindingContext = CatalogDataService.Instance.CatalogPageViewModel;
         }
@@ -43,22 +45,32 @@ namespace EssentialUIKit.Views.Catalog
             try
             {
                 SetActivity(true);
-                var content = await _client.GetStringAsync(ApiDataService.HorseRunnerApi + "id=" + _race.Id);
+                var content = await _client.GetStringAsync(ApiDataService.HorseRunnerApi + "id=" + _race.Id);                
                 var runners = JsonConvert.DeserializeObject<List<string>>(content);
-                
+
+
+                var quaddieGroupId = Application.Current.Properties["quaddieGroupId"].ToString();
+                var quaddieContent = await _client.GetStringAsync(ApiDataService.GetQuaddieGroupsApi + "qgId=" + quaddieGroupId);
+                var quaddieList = JsonConvert.DeserializeObject<List<QuaddieGroup>>(quaddieContent);
+                var quaddie = quaddieList.First();
+                var user = Application.Current.Properties.ContainsKey("name") ? Application.Current.Properties["name"].ToString() : "";
+
+                int i = 0;
                 foreach ( string r in runners)
                 {
                     var runnerArray = r.Split('|');
                     var runner = new Runner(runnerArray[0].Trim(), runnerArray[1].Trim(), runnerArray[2].Trim(), runnerArray[3].Trim());
+                    var runnerSelected = quaddie.Selections.FirstOrDefault(selection =>
+                         selection.Runner.BfSelectionId.ToString() == runner.Id);
                     Runners.Add(runner);
+                    if (runnerSelected != null)
+                    {
+                        Runners[i].SelectedColor = "LightGray";
+                        Runners[i].SelectedText = runnerSelected.User.Name;
+                    }
+                    i++;
                 }
-
-                Runners[0].SelectedColor = "LightGray";
-                Runners[0].SelectedText = "Aaron";
-                Runners[3].SelectedColor = "LightGray";
-                Runners[3].SelectedText = "Casey, Cam";
-                Runners[6].SelectedColor = "LightGray";
-                Runners[6].SelectedText = "Gareth";
+               
                 runnerListView.ItemsSource = Runners;               
                 
                 //BindingContext = this;
@@ -70,9 +82,7 @@ namespace EssentialUIKit.Views.Catalog
             finally
             {
                 SetActivity(false);
-            }
-
-            
+            }            
         }
 
         public void SetActivity(bool value)
@@ -85,18 +95,36 @@ namespace EssentialUIKit.Views.Catalog
 
         private async void ListView_OnSelectionChanged(object sender, SelectedItemChangedEventArgs e)
         {
-            if (e.SelectedItem == null)
+        }
+
+        private async void ListView_ItemTapped(object sender, ItemTappedEventArgs e)
+        {
+            if (e.Item == null)
             {
                 return;
             }
-            var runner = e.SelectedItem as Runner;
-            var quaddieGroupId = Application.Current.Properties["quaddieGroupId"] as string;
-            var user = Application.Current.Properties["user"] as string;
-
-            var content = await _client.GetStringAsync(ApiDataService.QuaddieBuilderApi + "qgId=" + quaddieGroupId + "&selectionId=" + runner.Id + "&user=" + user);
-            var runners = JsonConvert.DeserializeObject<List<string>>(content);
             
-            int i = 0;
+            var runner = e.Item as Runner;
+            var quaddieGroupId = Application.Current.Properties["quaddieGroupId"] as string;
+            var user = Application.Current.Properties["name"] as string;
+            
+            Boolean ok = await UserDialogs.Instance.ConfirmAsync(new ConfirmConfig
+            {                
+                OkText = "Ok",
+                CancelText = "Cancel",
+                Title = "Runner Selected: " + runner.Name
+            });
+
+            if (ok)
+            {
+
+                if (Application.Current.Properties.ContainsKey("name"))
+                {                    
+                    var content = await _client.GetStringAsync(ApiDataService.QuaddieBuilderApi + "qgId=" + quaddieGroupId + "&selectionId=" + runner.Id + "&user=" + user);
+                    int i = 0;
+                }
+            }
+            return;
         }
     }
 

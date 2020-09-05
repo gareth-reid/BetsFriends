@@ -76,9 +76,13 @@ namespace EssentialUIKit.Views.Catalog
             {
                 return;
             }
+
+            var quaddieGroup = e.SelectedItem as QuaddieGroup;
+            Application.Current.Properties["quaddieGroupId"] = quaddieGroup.QuaddieGroupId;
+
             var assembly = typeof(App).GetTypeInfo().Assembly;
             var pageName = "Views.Catalog.ListRacesPage";
-            var template = new Template("Races", "List Races", pageName, false, "", true, e.SelectedItem as Venue);
+            var template = new Template("Races", "List Races", pageName, false, "", true, quaddieGroup.Venue);
             
             Routing.RegisterRoute("ListRaces",
                 assembly.GetType($"EssentialUIKit.{pageName}"));
