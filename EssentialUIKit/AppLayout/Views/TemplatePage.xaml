@@ -62,11 +62,11 @@
                 Text="{Binding SelectedCategory.Name}"
                 VerticalOptions="CenterAndExpand" />
 
-            <Button
-                Clicked="Login"
+            <Label                
                 HorizontalOptions="End"
-                FontSize="16"
-                Style="{StaticResource SfGradientButtonStyle}"
+                FontSize="12"
+                FontAttributes="Bold"             
+                Style="{StaticResource ActionBarLabelStyle}"
                 VerticalOptions="CenterAndExpand"
                 Text="{Binding DisplayName}"/>
 

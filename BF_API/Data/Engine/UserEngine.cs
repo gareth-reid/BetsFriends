@@ -9,7 +9,7 @@ namespace BF_API.Data.Engine
         {
         }
 
-        public void AddUser(string username, string password, string email)
+        public bool AddUser(string username, string password, string email)
         {
             using (var db = new DataContext())
             {
@@ -27,6 +27,10 @@ namespace BF_API.Data.Engine
                     };
                     db.Users.Add(user);
                     db.SaveChanges();
+                    return true;
+                } else
+                {
+                    return false;
                 }
             }
         }

@@ -122,6 +122,7 @@ namespace BF_API.Data.Engine
                 using (var db = new DataContext())
                 {                    
                     return db.Groups
+                    .Where(qg => qg.Venue.OpenDate >= DateTime.Now)
                     .Include("Selections")
                     .Include("Selections.Runner")                    
                     .Include("Venue")

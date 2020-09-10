@@ -108,7 +108,11 @@
                                 <RowDefinition Height="Auto" />
                                 <RowDefinition Height="Auto" />                                
                             </Grid.RowDefinitions>
-                                <Label Grid.Row="0" 
+                                <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="Auto" />                                
+                            </Grid.ColumnDefinitions>
+                                <Label Grid.Row="0"  Grid.ColumnSpan="2"
                                            Margin="8,8,8,8"
                                            Text="{Binding Description}"
                                            TextColor="{DynamicResource Gray-900}"
@@ -117,9 +121,18 @@
                                            LineHeight="{OnPlatform Android=1.5, Default=-1}" />
 
                                         <!--Details of travel place-->
-                                        <Label Grid.Row="1" 
+                                        <Label Grid.Row="1" Grid.Column="0"
                                            Margin="8,8,8,8"
                                            Text="{Binding Venue.Description}"
+                                           TextColor="{DynamicResource Gray-700}"
+                                           FontSize="12"
+                                           FontFamily="{DynamicResource Montserrat-Medium}"
+                                           LineBreakMode="TailTruncation"
+                                           MaxLines="2"
+                                           LineHeight="{OnPlatform Android=1.2, Default=-1}" />
+                                <Label Grid.Row="1" Grid.Column="1"
+                                           Margin="8,8,8,8"
+                                           Text=""
                                            TextColor="{DynamicResource Gray-700}"
                                            FontSize="12"
                                            FontFamily="{DynamicResource Montserrat-Medium}"

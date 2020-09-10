@@ -30,8 +30,8 @@ namespace BF_API
 
             log.LogInformation("AddUser API accessed, Date:" + new DateTime().ToString());
             UserEngine userEngine = new UserEngine();
-            userEngine.AddUser(username, password, email);
-            return new OkObjectResult("");
+            bool result = userEngine.AddUser(username, password, email);
+            return new OkObjectResult(result.ToString());
         }
         
     }

@@ -149,55 +149,10 @@
     <Compile Update="AppLayout\Views\Styles.xaml.cs">
         <DependentUpon>%(Filename)</DependentUpon>
     </Compile>
-    <Compile Update="Views\AboutUs\AboutUsWithCardsPage.xaml.cs">
-      <DependentUpon>AboutUsWithCardsPage.xaml</DependentUpon>
-    </Compile>
     <Compile Update="Views\AboutUs\AboutUsWithParallaxScrollPage.xaml.cs">
       <DependentUpon>AboutUsWithParallaxScrollPage.xaml</DependentUpon>
     </Compile>
-    <Compile Update="Views\Article\MyArticlePage.xaml.cs">
-      <DependentUpon>MyArticlePage.xaml</DependentUpon>
-    </Compile>
-    <Compile Update="Views\Article\ArticleWithCommentsPage.xaml.cs">
-      <DependentUpon>ArticleWithCommentsPage.xaml</DependentUpon>
-    </Compile>
-    <Compile Update="Views\Article\Styles.xaml.cs">
-      <DependentUpon>%(Filename)</DependentUpon>
-    </Compile>
-    <Compile Update="Views\Catalog\ArticleListPage.xaml.cs">
-      <DependentUpon>ArticleListPage.xaml</DependentUpon>
-    </Compile>
-    <Compile Update="Views\Catalog\ArticleTilePage.xaml.cs">
-      <DependentUpon>ArticleTilePage.xaml</DependentUpon>
-    </Compile>
-    <Compile Update="Views\Bookmarks\BookmarksPage.xaml.cs">
-      <DependentUpon>BookmarksPage.xaml</DependentUpon>
-    </Compile>
-    <Compile Update="Views\Dashboard\DailyCaloriesReportPage.xaml.cs">
-      <DependentUpon>DailyCaloriesReportPage.xaml</DependentUpon>
-    </Compile>
-    <Compile Update="Views\Dashboard\DailyTimeLinePage.xaml.cs">
-      <DependentUpon>DailyTimelinePage.xaml</DependentUpon>
-    </Compile>
-    <Compile Update="Views\Profile\MasterPage.xaml.cs">
-      <DependentUpon>MasterPage.xaml</DependentUpon>
-    </Compile>
-    <Compile Update="Views\Bookmarks\PriceDetailView.xaml.cs">
-      <DependentUpon>%(Filename)</DependentUpon>
-    </Compile>
-    <Compile Update="Views\Bookmarks\WishlistPage.xaml.cs">
-      <DependentUpon>WishlistPage.xaml</DependentUpon>
-    </Compile>
-    <Compile Update="Views\Catalog\ProductHomePage.xaml.cs">
-      <DependentUpon>ProductHomePage.xaml</DependentUpon>
-    </Compile>
     <Compile Update="Views\Catalog\Styles.xaml.cs">
-      <DependentUpon>%(Filename)</DependentUpon>
-    </Compile>
-    <Compile Update="Views\Profile\ContactProfilePage.xaml.cs">
-      <DependentUpon>ContactProfilePage.xaml</DependentUpon>
-    </Compile>
-    <Compile Update="Views\ContactUs\Styles.xaml.cs">
       <DependentUpon>%(Filename)</DependentUpon>
     </Compile>
     <Compile Condition=" '$(EnableDefaultCompileItems)' == 'true' " Update="Views\Catalog\ListVenuesPage %28copy%29.xaml.cs">
@@ -214,18 +169,6 @@
   <ItemGroup>
     <Compile Update="Views\Chat\RecentChatPage.xaml.cs">
       <DependentUpon>RecentChatPage.xaml</DependentUpon>
-    </Compile>
-    <Compile Update="Views\Detail\FeedbackView.xaml.cs">
-      <DependentUpon>%(Filename)</DependentUpon>
-    </Compile>
-    <Compile Update="Views\Detail\Styles.xaml.cs">
-      <DependentUpon>%(Filename)</DependentUpon>
-    </Compile>
-    <Compile Update="Views\ErrorAndEmpty\Styles.xaml.cs">
-      <DependentUpon>%(Filename)</DependentUpon>
-    </Compile>
-    <Compile Update="Views\Feedback\FeedbackPage.xaml.cs">
-      <DependentUpon>FeedbackPage.xaml</DependentUpon>
     </Compile>
     <Compile Update="Views\Forms\AddContactPage.xaml.cs">
       <DependentUpon>AddContactPage.xaml</DependentUpon>
@@ -245,82 +188,12 @@
     <Compile Update="Views\Forms\SimpleSignUpPage.xaml.cs">
       <DependentUpon>SimpleSignUpPage.xaml</DependentUpon>
     </Compile>
-    <Compile Update="Views\History\MyOrdersView.xaml.cs">
-      <DependentUpon>MyOrdersView.xaml</DependentUpon>
-    </Compile>
-    <Compile Update="Views\OnBoarding\OnBoardingAnimationPage.xaml.cs">
-      <DependentUpon>OnBoardingAnimationPage.xaml</DependentUpon>
-    </Compile>
-    <Compile Update="Views\OnBoarding\OnBoardingAnimationPage.xaml.cs">
-      <DependentUpon>OnBoardingAnimationPage.xaml</DependentUpon>
-    </Compile>
-	<Compile Update="Views\OnBoarding\Styles.xaml.cs">
-      <DependentUpon>%(Filename)</DependentUpon>
-    </Compile>
-	<Compile Update="Views\OnBoarding\WalkthroughItemPage.xaml.cs">
-	  <DependentUpon>WalkthroughItemPage.xaml</DependentUpon>
-	</Compile>
-	<Compile Update="Views\Shopping\CartPage.xaml.cs">
-	  <DependentUpon>%(Filename)</DependentUpon>
-	</Compile>
-	<Compile Update="Views\Shopping\CatalogListPage.xaml.cs">
-	  <DependentUpon>%(Filename)</DependentUpon>
-	</Compile>
-	<Compile Update="Views\Shopping\CheckoutPage.xaml.cs">
-	  <DependentUpon>%(Filename)</DependentUpon>
-	</Compile>
-	<Compile Update="Views\Shopping\DeliveryView.xaml.cs">
-	  <DependentUpon>%(Filename)</DependentUpon>
-	</Compile>
-	<Compile Update="Views\Shopping\DetailPage.xaml.cs">
-	  <DependentUpon>%(Filename)</DependentUpon>
-	</Compile>
-	<Compile Update="Views\Shopping\EmailEntry.xaml.cs">
-	  <DependentUpon>%(Filename)</DependentUpon>
-	</Compile>
-	<Compile Update="Views\Shopping\FeedbackView.xaml.cs">
-	  <DependentUpon>%(Filename)</DependentUpon>
-	</Compile>
-	<Compile Update="Views\Shopping\LoginPage.xaml.cs">
-	  <DependentUpon>%(Filename)</DependentUpon>
-	</Compile>
-	<Compile Update="Views\Shopping\OnBoardingAnimationPage.xaml.cs">
-	  <DependentUpon>%(Filename)</DependentUpon>
-	</Compile>
-	<Compile Update="Views\Shopping\PaymentSuccessPage.xaml.cs">
-	  <DependentUpon>%(Filename)</DependentUpon>
-	</Compile>
-	<Compile Update="Views\Shopping\PaymentView.xaml.cs">
-	  <DependentUpon>%(Filename)</DependentUpon>
-	</Compile>
-	<Compile Update="Views\Shopping\PriceDetailView.xaml.cs">
-	  <DependentUpon>%(Filename)</DependentUpon>
-	</Compile>
-	<Compile Update="Views\Shopping\Styles.xaml.cs">
-	  <DependentUpon>%(Filename)</DependentUpon>
-	</Compile>
-	<Compile Update="Views\Shopping\WalkthroughItemPage.xaml.cs">
-	  <DependentUpon>%(Filename)</DependentUpon>
-	</Compile>
-	<Compile Update="Views\Social\Styles.xaml.cs">
-	  <DependentUpon>%(Filename)</DependentUpon>
-	</Compile>
-	<Compile Update="Views\Social\Templates\ProfileTemplate.xaml.cs">
-	  <DependentUpon>ProfileTemplate.xaml</DependentUpon>
-	</Compile>
 	<Compile Update="Views\Templates\Styles.xaml.cs">
-	  <DependentUpon>%(Filename)</DependentUpon>
-	</Compile>
-	<Compile Update="Views\Transaction\PaymentView.xaml.cs">
-	  <DependentUpon>%(Filename)</DependentUpon>
-	</Compile>
-	<Compile Update="Views\Transaction\PriceDetailView.xaml.cs">
 	  <DependentUpon>%(Filename)</DependentUpon>
 	</Compile>
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Views\Collaboration\" />
     <Folder Include="Models\Api\" />
   </ItemGroup>
   <Import Project="..\..\build\tools\Syncfusion.CodeAnalysis.FxCop\tools\FxCop.MsBuild.targets" Condition="Exists('..\..\build\tools\Syncfusion.CodeAnalysis.FxCop\tools\FxCop.MsBuild.targets')" />

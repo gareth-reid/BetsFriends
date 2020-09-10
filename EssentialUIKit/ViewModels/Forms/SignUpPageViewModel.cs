@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Net.Http;
+using Acr.UserDialogs;
 using EssentialUIKit.AppLayout.Views;
 using EssentialUIKit.DataService;
 using EssentialUIKit.Views.Forms;
@@ -172,9 +173,21 @@ namespace EssentialUIKit.ViewModels.Forms
             else
             {                
                 var api = ApiDataService.AddUserApi + "un=" + name + "&pw=" + password + "&em=" + email;
-                _client.GetStringAsync(api);
-                Application.Current.Properties.Add("name", name);
-                App.Current.MainPage = new NavigationPage(new HomePage());
+                var result = _client.GetStringAsync(api).Result;
+                if (result == "False")
+                {
+                    UserDialogs.Instance.ConfirmAsync(new ConfirmConfig
+                    {
+                        OkText = "Ok",
+                        CancelText = "Cancel",
+                        Title = "Name already Exists: " + name
+                    });
+                }
+                else
+                {
+                    Application.Current.Properties.Add("name", name);
+                    App.Current.MainPage = new NavigationPage(new HomePage());
+                }                
             }
             
         }
