@@ -63,7 +63,7 @@
                     <Frame
                         Margin="0"
                         Padding="0"
-                        BackgroundColor="#04B875"
+                        BackgroundColor="#d54008"
                         CornerRadius="10"
                         HasShadow="False"
                         Grid.Column="2"
@@ -80,7 +80,7 @@
                                 Text="{Binding DisplayName}"
                                 TextColor="{DynamicResource Gray-White}" />
                         </Frame.Content>
-                </Frame>
+                    </Frame>
                 </Grid>
         <border:SfBorder
             Grid.Row="2"
@@ -108,20 +108,18 @@
                                 <RowDefinition Height="Auto" />
                                 <RowDefinition Height="Auto" />                                
                             </Grid.RowDefinitions>
-                                <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="Auto" />
-                                <ColumnDefinition Width="Auto" />                                
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />                                                             
                             </Grid.ColumnDefinitions>
-                                <Label Grid.Row="0"  Grid.ColumnSpan="2"
+                                <Label Grid.Row="0"  
                                            Margin="8,8,8,8"
                                            Text="{Binding Description}"
                                            TextColor="{DynamicResource Gray-900}"
                                            FontSize="16"
                                            FontFamily="{DynamicResource Montserrat-SemiBold}"
                                            LineHeight="{OnPlatform Android=1.5, Default=-1}" />
-
                                         <!--Details of travel place-->
-                                        <Label Grid.Row="1" Grid.Column="0"
+                                        <Label Grid.Row="1" 
                                            Margin="8,8,8,8"
                                            Text="{Binding Venue.Description}"
                                            TextColor="{DynamicResource Gray-700}"
@@ -130,16 +128,6 @@
                                            LineBreakMode="TailTruncation"
                                            MaxLines="2"
                                            LineHeight="{OnPlatform Android=1.2, Default=-1}" />
-                                <Label Grid.Row="1" Grid.Column="1"
-                                           Margin="8,8,8,8"
-                                           Text=""
-                                           TextColor="{DynamicResource Gray-700}"
-                                           FontSize="12"
-                                           FontFamily="{DynamicResource Montserrat-Medium}"
-                                           LineBreakMode="TailTruncation"
-                                           MaxLines="2"
-                                           LineHeight="{OnPlatform Android=1.2, Default=-1}" />
-                                                           
                                 
                             </Grid>
                         </ViewCell>

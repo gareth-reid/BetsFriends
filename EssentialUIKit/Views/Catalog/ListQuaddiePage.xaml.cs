@@ -78,7 +78,7 @@ namespace EssentialUIKit.Views.Catalog
             }
 
             var quaddieGroup = e.SelectedItem as QuaddieGroup;
-            Application.Current.Properties["quaddieGroupId"] = quaddieGroup.QuaddieGroupId;
+            Application.Current.Properties["quaddieGroupId"] = quaddieGroup.QuaddieGroupId.ToString();
 
             var assembly = typeof(App).GetTypeInfo().Assembly;
             var pageName = "Views.Catalog.ListRacesPage";

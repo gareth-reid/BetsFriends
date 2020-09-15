@@ -40,7 +40,12 @@ namespace BF_API
             {
                 quaddieGroups.Add(quaddieBuilderEngine.GetFromApiId(quaddieGroupId));
             }
-            return new OkObjectResult(quaddieGroups);
+            Newtonsoft.Json.JsonConvert.DefaultSettings = () => new JsonSerializerSettings
+            {
+                ReferenceLoopHandling = ReferenceLoopHandling.Ignore,
+            };
+
+            return new OkObjectResult(Newtonsoft.Json.JsonConvert.SerializeObject(quaddieGroups));
         }
     }
 }

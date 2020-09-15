@@ -59,8 +59,9 @@ namespace BF_API.Data.Engine
                     var quaddieGroups = db.Groups
                         .Include("Selections")
                         .Include("Selections.Runner")
-                        .Include("Venue")
-                        .Include("Selections.User")
+                        .Include("Selections.Runner.Race")
+                        .Include("Venue")                        
+                        .Include("Selections.User")                        
                         .Where(qg => qg.QuaddieGroupId == quaddieGroupId).ToList();
 
                     if (quaddieGroups != null && quaddieGroups.Count > 0)
@@ -126,7 +127,7 @@ namespace BF_API.Data.Engine
                     .Include("Selections")
                     .Include("Selections.Runner")                    
                     .Include("Venue")
-                    .Include("Selections.User")
+                    .Include("Selections.User")                    
                     .ToList();                    
                 }
         }

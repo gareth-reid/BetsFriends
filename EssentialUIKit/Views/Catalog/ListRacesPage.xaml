@@ -9,6 +9,7 @@
              xmlns:listView="clr-namespace:Syncfusion.ListView.XForms;assembly=Syncfusion.SfListView.XForms"
              xmlns:core="clr-namespace:Syncfusion.XForms.Core;assembly=Syncfusion.Core.XForms"
              xmlns:template="clr-namespace:EssentialUIKit.Views.Templates"
+             xmlns:views="clr-namespace:EssentialUIKit.AppLayout.Views;assembly=EssentialUIKit"
              x:Class="EssentialUIKit.Views.Catalog.ListRacesPage"
              BackgroundColor="{DynamicResource Gray-White}"
              NavigationPage.HasNavigationBar="False"
@@ -29,6 +30,8 @@
 
     <ContentPage.Content>
         <StackLayout Spacing="0">
+
+ 
              <Grid HeightRequest="64">
                     <Grid.ColumnDefinitions>                                
                         <ColumnDefinition Width="1*" />
@@ -63,7 +66,7 @@
                     <Frame
                         Margin="0"
                         Padding="0"
-                        BackgroundColor="#04B875"
+                        BackgroundColor="#d54008"
                         CornerRadius="10"
                         HasShadow="False"
                         Grid.Column="2"
@@ -80,7 +83,8 @@
                                 Text="{Binding DisplayName}"
                                 TextColor="{DynamicResource Gray-White}" />
                         </Frame.Content>
-                </Frame>
+                    </Frame>
+                 
                 </Grid>
         <border:SfBorder
             Grid.Row="2"
@@ -89,6 +93,7 @@
             BackgroundColor="{DynamicResource Gray-White}"
             BorderWidth="0"
             CornerRadius="10,10,0,0">
+            <AbsoluteLayout>
             <StackLayout>
            <ActivityIndicator HorizontalOptions="Center" VerticalOptions="Center" 
             IsRunning="{Binding Source={x:Reference raceListView}}" 
@@ -135,8 +140,28 @@
                 </ListView.ItemTemplate>
            </ListView>
          </StackLayout>
+                <Image 
+                        Opacity="1"
+                        Source="View.png"
+                        AbsoluteLayout.LayoutBounds="1.0, 0.0, 0.1, 0.1"
+                    AbsoluteLayout.LayoutFlags="All"
+                        WidthRequest="40" >
+                    <Image.GestureRecognizers>
+                        <TapGestureRecognizer
+                            Tapped="OnImageNameTapped"
+                            NumberOfTapsRequired="1" />
+                    </Image.GestureRecognizers>
+                </Image>
+                 
+            </AbsoluteLayout>
+
         </border:SfBorder>
+            <AbsoluteLayout>
+                <views:QuaddieView x:Name="QuaddieView" AbsoluteLayout.LayoutFlags="All" AbsoluteLayout.LayoutBounds="0,1,1,1"/>
+            </AbsoluteLayout>
+            
             </StackLayout>
+        
         </ContentPage.Content>
    
     </ContentPage>

@@ -1,4 +1,5 @@
-﻿using Syncfusion.XForms.Buttons;
+﻿using System.Collections.Generic;
+using Syncfusion.XForms.Buttons;
 using Syncfusion.XForms.PopupLayout;
 using Xamarin.Forms;
 using Xamarin.Forms.Internals;
@@ -60,5 +61,8 @@ namespace EssentialUIKit.Controls
 
             this.Show();
         }
+
+        
+
     }
 }

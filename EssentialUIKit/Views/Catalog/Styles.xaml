@@ -36,7 +36,13 @@
     <Style TargetType="control:TitleView">
         <Setter Property="BackgroundColor" Value="{DynamicResource Gray-White}" />
     </Style>
-
+    <Style x:Key="FloatingButtonStyle" TargetType="Button">
+        <Setter Property="TextColor" Value="{DynamicResource Gray-600}" />
+        <Setter Property="BackgroundColor" Value="{StaticResource Transparent}" />
+        <Setter Property="FontFamily" Value="{StaticResource FontIcons}" />
+        <Setter Property="FontSize" Value="14" />       
+        
+    </Style>
     <!--  Common style for icon buttons  -->
     <Style x:Key="IconButtonStyle" TargetType="buttons:SfButton">
         <Setter Property="TextColor" Value="{DynamicResource Gray-600}" />
@@ -61,7 +67,21 @@
         <Setter Property="VerticalTextAlignment" Value="Center" />
         <Setter Property="VerticalOptions" Value="Center" />
         <Setter Property="HorizontalOptions" Value="Start" />
+        <Setter Property="Padding" Value="1,10,1,10"/>
     </Style>
+
+    <Style x:Key="LabelStyleSubItem" TargetType="Label">
+        <Setter Property="TextColor" Value="{DynamicResource Gray-700}" />
+        <Setter Property="FontFamily" Value="Montserrat-Regular" />
+        <Setter Property="FontSize" Value="10" />
+        <Setter Property="LineHeight" Value="{OnPlatform Android=1.5, Default=-1}" />
+        <Setter Property="HorizontalTextAlignment" Value="Start" />
+        <Setter Property="VerticalTextAlignment" Value="Center" />
+        <Setter Property="VerticalOptions" Value="Center" />
+        <Setter Property="HorizontalOptions" Value="Start" />
+        <Setter Property="Padding" Value="1,10,1,10"/>
+    </Style>
+    
 
     <!--  Common style for SfListView  -->
     <Style x:Key="SfListViewStyle" TargetType="listView:SfListView">
@@ -248,7 +268,8 @@
     </Style>
 
     <!--  Common style for favourite button  -->
-    <Style x:Key="FavouriteButton" TargetType="buttons:SfButton">
+    <Style x:Key="
+           FavouriteButton" TargetType="buttons:SfButton">
         <Setter Property="BackgroundColor" Value="{DynamicResource Transparent}" />
         <Setter Property="FontFamily" Value="{StaticResource FontIcons}" />
         <Setter Property="FontSize" Value="18" />

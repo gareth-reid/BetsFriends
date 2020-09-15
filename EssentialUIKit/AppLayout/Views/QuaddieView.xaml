@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="EssentialUIKit.AppLayout.Views.QuaddieView"
+             IsVisible="False"
+             xmlns:buttons="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Buttons.XForms"
+             xmlns:segmentControl="clr-namespace:Syncfusion.XForms.Buttons;assembly=Syncfusion.Buttons.XForms">
+
+    <ContentView.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Styles.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </ContentView.Resources>
+
+    <Grid Padding="10, 10, 10, 10">
+        <!--Semi transparent view-->
+        <BoxView x:Name="ShadowView"
+                 IsVisible="False" 
+                 BackgroundColor="Gray"
+                 Opacity="0.5">
+            <BoxView.GestureRecognizers>
+                <TapGestureRecognizer Tapped="CloseSettings"/>
+            </BoxView.GestureRecognizers>
+        </BoxView>
+
+        <Grid x:Name="MainContent"
+              BackgroundColor="White"
+              TranslationY="300"
+              VerticalOptions="EndAndExpand"
+              Opacity="0">
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+               
+            </Grid.RowDefinitions>
+
+            <Frame
+                Grid.Row="0"
+                Padding="0"
+                BackgroundColor="White"
+                CornerRadius="20"
+                Margin="0,-20,0,0"
+                HasShadow="False" />
+   
+  <StackLayout x:Name="QuaddieLayout" Spacing="5">
+
+   
+      </StackLayout>
+   
+           
+        </Grid>
+    </Grid>
+</ContentView>

@@ -140,6 +140,7 @@
   
   <ItemGroup>
     <Compile Remove="Views\Catalog\ListRacesPage %28copy%29.xaml.cs" />
+    <Compile Remove="Controls\QuaddieView.xaml.cs" />
   </ItemGroup>
   <ItemGroup>
     <Compile Update="Views\Catalog\ListVenuesPage.xaml.cs">

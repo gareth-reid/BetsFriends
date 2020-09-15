@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using EssentialUIKit.Themes;
 using Xamarin.Forms;
 using Xamarin.Forms.Internals;
@@ -38,6 +39,16 @@ namespace EssentialUIKit.AppLayout
                 mergedDictionaries.Add(new LightTheme());
                 AppSettings.Instance.IsDarkTheme = false;
             }
+        }
+
+        public static ICollection<ResourceDictionary> GetMergedDictionaries(this ResourceDictionary resources)
+        {
+            if (resources != null)
+            {
+                var mergedDictionaries = resources.MergedDictionaries;
+                return mergedDictionaries;                
+            }
+            return null;
         }
 
         public static void ApplyColorSet(int index)

@@ -35,6 +35,7 @@ namespace EssentialUIKit
             InitializeComponent();
             
             Syncfusion.Licensing.SyncfusionLicenseProvider.RegisterLicense("MzAyNjQyQDMxMzcyZTM0MmUzME5yNnh2RDJFRmNnbDFLaE92b0Mya2dqTzVITE5uVmQzSjRNOXhzY3UveU09");
+            AppSettings.Instance.SelectedPrimaryColor = 4;
             // this.MainPage = new AppShell();
             if (Application.Current.Properties.ContainsKey("name"))
             {

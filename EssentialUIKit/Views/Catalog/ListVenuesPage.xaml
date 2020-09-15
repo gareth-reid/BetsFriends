@@ -63,7 +63,7 @@
                     <Frame
                         Margin="0"
                         Padding="0"
-                        BackgroundColor="#04B875"
+                        BackgroundColor="#d54008"
                         CornerRadius="10"
                         HasShadow="False"
                         Grid.Column="2"
@@ -80,7 +80,7 @@
                                 Text="{Binding DisplayName}"
                                 TextColor="{DynamicResource Gray-White}" />
                         </Frame.Content>
-                </Frame>
+                    </Frame>
                 </Grid>
         <border:SfBorder
             Grid.Row="2"

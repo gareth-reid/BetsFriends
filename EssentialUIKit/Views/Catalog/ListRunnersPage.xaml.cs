@@ -107,23 +107,36 @@ namespace EssentialUIKit.Views.Catalog
             var runner = e.Item as Runner;
             var quaddieGroupId = Application.Current.Properties["quaddieGroupId"] as string;
             var user = Application.Current.Properties["name"] as string;
-            
-            Boolean ok = await UserDialogs.Instance.ConfirmAsync(new ConfirmConfig
-            {                
-                OkText = "Ok",
-                CancelText = "Cancel",
-                Title = "Runner Selected: " + runner.Name
-            });
 
-            if (ok)
+            if (quaddieGroupId == null)
             {
+                await UserDialogs.Instance.ConfirmAsync(new ConfirmConfig
+                {
+                    OkText = "Ok",
+                    CancelText = "Cancel",
+                    Title = "No Quaddie Selected"
+                });
+            }
+            else
+            {
+                Boolean ok = await UserDialogs.Instance.ConfirmAsync(new ConfirmConfig
+                {
+                    OkText = "Ok",
+                    CancelText = "Cancel",
+                    Title = "Runner Selected: " + runner.Name
+                });
+                if (ok)
+                {
 
-                if (Application.Current.Properties.ContainsKey("name"))
-                {                    
-                    var content = await _client.GetStringAsync(ApiDataService.QuaddieBuilderApi + "qgId=" + quaddieGroupId + "&selectionId=" + runner.Id + "&user=" + user);
-                    int i = 0;
+                    if (Application.Current.Properties.ContainsKey("name"))
+                    {
+                        var content = await _client.GetStringAsync(ApiDataService.QuaddieBuilderApi + "qgId=" + quaddieGroupId + "&selectionId=" + runner.Id + "&user=" + user);
+                        int i = 0;
+                    }
                 }
             }
+
+            
             return;
         }
     }

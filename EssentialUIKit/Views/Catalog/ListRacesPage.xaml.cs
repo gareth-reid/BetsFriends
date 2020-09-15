@@ -4,8 +4,11 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Net.Http;
 using System.Reflection;
+using Acr.UserDialogs;
 using EssentialUIKit.AppLayout.Models;
 using EssentialUIKit.AppLayout.Views;
+using EssentialUIKit.Views;
+using EssentialUIKit.Controls;
 using EssentialUIKit.DataService;
 using EssentialUIKit.Models.Api;
 using EssentialUIKit.ViewModels;
@@ -98,12 +101,14 @@ namespace EssentialUIKit.Views.Catalog
             //OnPropertyChanged();
         }
 
+        
         private async void ListView_OnSelectionChanged(object sender, SelectedItemChangedEventArgs e)
         {
         }
 
         private async void ListView_ItemTapped(object sender, ItemTappedEventArgs e)
         {
+            
             if (e.Item == null)
             {
                 return;
@@ -118,7 +123,35 @@ namespace EssentialUIKit.Views.Catalog
 
             Application.Current.MainPage.Navigation.PushAsync(new TemplateHostPage(template));
         }
+
+
+        async void OnImageNameTapped(object sender, EventArgs args)
+        {            
+            var quaddieGroupId = Application.Current.Properties["quaddieGroupId"].ToString();
+            var quaddieContent = await _client.GetStringAsync(ApiDataService.GetQuaddieGroupsApi + "qgId=" + quaddieGroupId);
+            var quaddieList = JsonConvert.DeserializeObject<List<QuaddieGroup>>(quaddieContent);
+            var quaddie = quaddieList.First();
+
+            QuaddieView.Show(quaddie);
+            string content = "";
+            
+            {
+                //sr.Runner.Race
+            }
+            //sfPopupView.ShowPopUp(new List<Frame>()); // content: quaddie.Selections.First().Runner.Race.Description + "\n" + quaddie.Selections.First().Runner.Name + " (" + quaddie.Selections.First().User.Name +")\nNext Line");
+        }
     }
+
+    /*protected override bool OnBackButtonPressed()
+    {
+        if (SettingsView.IsVisible)
+        {
+            SettingsView.Hide();
+            return true;
+        }
+
+        return base.OnBackButtonPressed();
+    }*/
 
     public class Race
     {
