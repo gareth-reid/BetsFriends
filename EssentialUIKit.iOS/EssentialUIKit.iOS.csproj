@@ -80,7 +80,7 @@
     <ConsolePause>False</ConsolePause>
     <MtouchArch>ARM64</MtouchArch>
     <BuildIpa>True</BuildIpa>
-    <CodesignProvision>Automatic:AdHoc</CodesignProvision>
+    <CodesignProvision>iOS Team Provisioning Profile: com.worthalook.net.BetsFriends</CodesignProvision>
     <CodesignKey>iPhone Developer: betsfriendsgr@gmail.com (KLZMA7656R)</CodesignKey>
     <CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
