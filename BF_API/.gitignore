@@ -72,7 +72,9 @@ artifacts/
 *.pidb
 *.svclog
 *.scc
-
+*.pubxml.user
+*.pubxml
+DataContext.cs
 # Chutzpah Test files
 _Chutzpah*
 
