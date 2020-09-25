@@ -215,5 +215,6 @@
     <Folder Include="Data\Model\" />
     <Folder Include="Data\Engine\" />
     <Folder Include="UserApi\" />
+    <Folder Include="SearchApi\" />
   </ItemGroup>
 </Project>
