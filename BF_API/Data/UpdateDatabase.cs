@@ -10,6 +10,7 @@ using Newtonsoft.Json;
 using BetfairNG;
 using BetfairNG.Data;
 using System.Collections.Generic;
+
 using System.Linq;
 using System.Runtime.Caching;
 using BF_API.CacheManager;
@@ -29,10 +30,10 @@ namespace BF_API
             ILogger log, ExecutionContext context)
         {
             try
-            {
+            {   
                 using (var db = new DataContext())
-                {
-                    //db.Database.EnsureDeleted();
+                {                
+                    db.Database.EnsureDeleted();                    
                     db.Database.EnsureCreated();
                 }
                 //BFHorseVenues.Run(req, log, context);

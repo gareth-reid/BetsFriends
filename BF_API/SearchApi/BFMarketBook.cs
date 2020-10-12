@@ -38,7 +38,7 @@ namespace BF_API
             log.LogInformation("");
 
             return await apiConfig.BetfairClient.ListMarketBook(
-              marketIds);
+              marketIds, new PriceProjection() { Virtualise = true, PriceData = new HashSet<PriceData>() { PriceData.SP_AVAILABLE, PriceData.SP_TRADED, PriceData.EX_TRADED, PriceData.EX_BEST_OFFERS, PriceData.EX_ALL_OFFERS } }, null);
         }       
         
     }

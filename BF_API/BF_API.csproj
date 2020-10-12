@@ -216,5 +216,8 @@
     <Folder Include="Data\Engine\" />
     <Folder Include="UserApi\" />
     <Folder Include="SearchApi\" />
+    <Folder Include="Entities\" />
+    <Folder Include="Helpers\" />
+    <Folder Include="Helpers\ExtensionMethods\" />
   </ItemGroup>
 </Project>

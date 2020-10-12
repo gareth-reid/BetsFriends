@@ -38,7 +38,7 @@ namespace BF_API
             log.LogInformation("");
 
             return await apiConfig.BetfairClient.ListMarketCatalogue(
-              marketFilter, null, null, 100);
+              marketFilter, new HashSet<MarketProjection>() { MarketProjection.EVENT, MarketProjection.EVENT_TYPE, MarketProjection.COMPETITION }, null, 100);
         }       
         
     }
