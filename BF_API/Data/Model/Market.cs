@@ -14,10 +14,15 @@ namespace BF_API.Data
         public string MarketId { get; set; }
         public string EventType { get; set; }
         public string Competition { get; set; }        
-        public DateTime? Date { get; set; }        
+        public DateTime? Date { get; set; }
+        public DateTime? DateAdded { get; set; }
         public string SelectionValue { get; set; }
-        
-        public string Status { get; set; }
+        public double? LayPrice { get; set; }
+        public double? BackPrice { get; set; }
+        public double? AvlToBack { get; set; }
+        public double? AvlToLay { get; set; }
+
+public string Status { get; set; }
         public string Selection
         {
             get
@@ -52,11 +57,11 @@ namespace BF_API.Data
                 {
                     if (Order == 0)
                     {
-                        return "Over";
+                        return "Under";
                     }
                     else
                     {
-                        return "Under";
+                        return "Over";
                     }
                 }
                 else if (MarketName == "Match Odds")

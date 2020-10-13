@@ -45,48 +45,14 @@ namespace BF_API
             if (multiId != "")
             {
                 multis = new List<MultiBuilder>() { multiEngine.GetFromApiId(multiId) };
-
             }
             else
             {
                 multis = multiEngine.GetLatest(count);
             }
-
-            foreach (MultiBuilder multi in multis)
-            {
-                if (loadNonSelected)
-                {
-                    UpdateResults(multi.Markets);
-                }
-                UpdateResults(multi.FinalMarkets);
-            }
-
+            
             return multis;
-        }
-
-        public static void UpdateResults(ICollection<SingleMarket> markets)
-        {
-            foreach (SingleMarket sm in markets)
-            {
-                if ((sm.Status == "OPEN" || sm.Status == "ACTIVE") && sm.Date.HasValue && sm.Date.Value < DateTime.Now)
-                {
-                    //GET RESULTS                
-                    var apiConfig = new ApiConfig(_context);
-                    IEnumerable<MarketBook> marketBooks = apiConfig.BetfairClient.ListMarketBook(
-                     new HashSet<String>() { sm.MarketId }).Result.Response;
-
-                    var marketBook = marketBooks.First();
-                    sm.Status = marketBook.Runners.Find(
-                        runner => runner.SelectionId == sm.SelectionId).Status.ToString();
-                    using (var db = new DataContext())
-                    {
-                        db.Markets.Add(sm);
-                        db.Entry(sm).State = EntityState.Modified;
-                        db.SaveChanges();
-                    }
-                }
-            }
-        }
+        }        
     }
     
 }

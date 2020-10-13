@@ -24,31 +24,37 @@ using BF_API.Entities;
 
 namespace BF_API
 {
-    public static class BFBuildMulti
+    public static class GetMarkets
     {
-        [FunctionName("BFBuildMulti")]
-        public static MultiBuilder Run(
+        [FunctionName("GetMarkets")]
+        public static List<SingleMarket> Run(
             [HttpTrigger(AuthorizationLevel.Anonymous, "get", "post", Route = null)] HttpRequest req,
             ILogger log, ExecutionContext context)
         {
 
             log.LogInformation("BFBuildMulti BetFair API accessed, Date:" + new DateTime().ToString());            
             ICacheManager<MultiBuilder> cacheManager = new CacheManager<MultiBuilder>();
-            var apiConfig = new ApiConfig(context);
-            var muiltBuilderEngine = new MuiltBuilderEngine(apiConfig);
-            var marketfilter = new CustomMarketFilter()
+            var marketEngine = new MarketEngine();
+            var eventId = req.Query["eventId"].ToString();
+
+            //check if already saved
+            var markets = marketEngine.GeAllForEvent(eventId);
+            if (markets != null && markets.Count > 0)
             {
-                EventTypes = new HashSet<string> { "1" },
-                MarketTypes = new HashSet<string> { "MATCH_ODDS", "OVER_UNDER_25", "OVER_UNDER_15" },
-                Count = 20,
-                DateFrom = DateTime.Now.AddHours(.5),
-                DateTo = DateTime.Now.AddHours(10)
-
-            };
-
-            var multi = muiltBuilderEngine.Execute(marketfilter, true);
-            multi.Execute();
-            return multi;
+                return markets;
+            }
+            else
+            {
+                var apiConfig = new ApiConfig(context);
+                var muiltBuilderEngine = new MuiltBuilderEngine(apiConfig);
+                var marketfilter = new CustomMarketFilter()
+                {
+                    EventIds = new HashSet<string> { eventId },
+                    MarketTypes = new HashSet<string> { "MATCH_ODDS", "OVER_UNDER_25", "OVER_UNDER_15" },
+                    Count = 5
+                };
+                return muiltBuilderEngine.Execute(marketfilter, false).Markets.ToList();
+            }            
         }
     }
 }

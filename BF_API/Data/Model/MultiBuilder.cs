@@ -23,7 +23,7 @@ namespace BF_API.Data
             var events = Markets.GroupBy(market => market.EventId);
             foreach (IGrouping<String, SingleMarket> e in events)
             {
-                var orderedByRationMarkets = e.Where(m => (m.BackLayRatio > 0 && m.BackLayRatio < 0.3) && m.Price < 3 && m.Price > 1.05);
+                var orderedByRationMarkets = e.Where(m => (m.BackLayRatio > 0 && m.BackLayRatio < 0.6) && m.Price < 3 && m.Price > 1.05);
                 if (orderedByRationMarkets.Count() > 0)
                 {
                     FinalMarkets.Add(orderedByRationMarkets.OrderBy(m => m.BackLayRatio).First());

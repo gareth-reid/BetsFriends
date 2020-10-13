@@ -48,6 +48,20 @@ namespace BF_API.Data.Engine
                 return multis;
             }
         }
+
+        public List<MultiBuilder> GetRecent()
+        {
+            using (var db = new DataContext())
+            {
+                var multis = db.MultiBuilders
+                    .Include("FinalMarkets")
+                    .Include("Markets")
+                    .Where(m => m.DateAdded > DateTime.Now.AddDays(-10))                    
+                    .ToList();
+
+                return multis;
+            }
+        }
     }
 }
 
